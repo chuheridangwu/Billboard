@@ -19,8 +19,9 @@ enum ViewType {
     case style
     enum FontStyle: String {
         case style1 = "Helvetica-Bold"
-        case style2 = "Mishafi"
-        case style3 = "Zapfino"
+        case style2 = "FZXS12"
+        case style3 = "STHeitiTC-Medium"
+        case style4 = "PangMenZhengDao-Cu"
     }
 }
 
@@ -35,7 +36,7 @@ class ConfigView: UIView {
 
     let listAry1 = [0,0.5,1,1.5]
     let listAry2 = [24,36,48,64,72]
-    let listAry3 = [ViewType.FontStyle.style1,ViewType.FontStyle.style1,ViewType.FontStyle.style1,ViewType.FontStyle.style1]
+    let listAry3 = [ViewType.FontStyle.style1,ViewType.FontStyle.style4,ViewType.FontStyle.style2,ViewType.FontStyle.style3]
     let listAry4 = [UIColor.red,.yellow,.blue,.white]
 
     let view1 = BtnListView.init(frame: CGRect.zero)
@@ -221,6 +222,9 @@ class BtnListView: UIView{
                     case .style3:
                         btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style3.rawValue, size: Config.shareInstance.fontSize)
                         break
+                    case .style4:
+                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style4.rawValue, size: Config.shareInstance.fontSize)
+                        break
                         
                     }
                     btn.setTitle("样式", for: UIControl.State.normal)
@@ -295,7 +299,9 @@ class BtnListView: UIView{
             case .style3:
                 Config.shareInstance.fontStyle = ViewType.FontStyle.style3.rawValue
                 break
-                
+            case .style4:
+                Config.shareInstance.fontStyle = ViewType.FontStyle.style4.rawValue
+                break
             }
             break
         case .seep:

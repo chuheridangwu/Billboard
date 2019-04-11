@@ -39,5 +39,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FZXIANGSU12.TTF</string>
+		<string>嚒嚒爱情相随.ttf</string>
+		<string>PangMenZhengDaoCuShuTi-2.ttf</string>
+	</array>
 </dict>
 </plist>

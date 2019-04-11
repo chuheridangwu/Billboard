@@ -38,7 +38,7 @@ class Config {
     
     var fontStyle: String = ""{
         didSet{
-            label.font = UIFont.init(name: fontStyle, size: fontSize)
+            label.font = UIFont.init(name: fontStyle, size: 120)
         }
     }
     

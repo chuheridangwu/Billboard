@@ -49,6 +49,9 @@
 		871B71BB2249FD8900479E2A /* ConstraintLayoutGuide+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B718F2249FD8800479E2A /* ConstraintLayoutGuide+Extensions.swift */; };
 		871B71BC2249FD8900479E2A /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B71902249FD8800479E2A /* ConstraintLayoutSupportDSL.swift */; };
 		871B71BD2249FD8900479E2A /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B71912249FD8800479E2A /* ConstraintMakerRelatable.swift */; };
+		87C3614E225F27C9000570AF /* 嚒嚒爱情相随.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */; };
+		87C36150225F27D4000570AF /* FZXIANGSU12.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 87C3614F225F27D3000570AF /* FZXIANGSU12.TTF */; };
+		87C36159225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +118,9 @@
 		871B71902249FD8800479E2A /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
 		871B71912249FD8800479E2A /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
 		871B71922249FD8800479E2A /* SnapKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SnapKit.xcodeproj; sourceTree = "<group>"; };
+		87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "嚒嚒爱情相随.ttf"; sourceTree = "<group>"; };
+		87C3614F225F27D3000570AF /* FZXIANGSU12.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = FZXIANGSU12.TTF; sourceTree = "<group>"; };
+		87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PangMenZhengDaoCuShuTi-2.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,7 @@
 				87023BFB2240C98C004700A9 /* ViewController.swift */,
 				30FDC4172246696C00DC8A31 /* ConfigView.swift */,
 				30FDC419224669B300DC8A31 /* Config.swift */,
+				87C3615B225F2E16000570AF /* FontSourse */,
 				871B716C2249FD8800479E2A /* SnapKit */,
 				87023C0B2240F9CE004700A9 /* Extension */,
 				87023BFD2240C98C004700A9 /* Main.storyboard */,
@@ -227,6 +234,16 @@
 				871B71C62249FE7500479E2A /* SnapKit Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		87C3615B225F2E16000570AF /* FontSourse */ = {
+			isa = PBXGroup;
+			children = (
+				87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */,
+				87C3614F225F27D3000570AF /* FZXIANGSU12.TTF */,
+				87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */,
+			);
+			path = FontSourse;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +330,9 @@
 				87023C042240C98D004700A9 /* LaunchScreen.storyboard in Resources */,
 				87023C012240C98D004700A9 /* Assets.xcassets in Resources */,
 				87023BFF2240C98C004700A9 /* Main.storyboard in Resources */,
+				87C36150225F27D4000570AF /* FZXIANGSU12.TTF in Resources */,
+				87C36159225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf in Resources */,
+				87C3614E225F27C9000570AF /* 嚒嚒爱情相随.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
