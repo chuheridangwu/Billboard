@@ -14,7 +14,7 @@ import UIKit
 let screenWidth = UIScreen.main.bounds.size.width
 let screenHeight = UIScreen.main.bounds.size.height
 let statusHeight = UIApplication.shared.statusBarFrame.size.height //tabbar状态栏高度
-
+let tabbarHeight = statusHeight >= 20 ? 34 : 0
 
 extension String{
     

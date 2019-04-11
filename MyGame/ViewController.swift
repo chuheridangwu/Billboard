@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         return view;
     }()
     
-    var time: Double = 10
+    var time: TimeInterval = 5
     
     lazy var label :UILabel = {
         let label = UILabel.init(frame: CGRect(x: view.frame.size.height, y:0, width: view.frame.size.height, height: view.frame.size.width))
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     }()
     
     lazy var animation: CABasicAnimation = {
-        let min = label.viewWidth() / screenWidth * 5;
+        let min = label.viewWidth() / screenHeight * Config.shareInstance.speed;
         let animation = CABasicAnimation.init(keyPath: "transform.translation.x")
         animation.toValue = -(label.frame.size.width + view.bounds.size.height)
         animation.duration = CFTimeInterval(min)
@@ -68,7 +68,6 @@ class ViewController: UIViewController {
             let str: String! = subtitle
             label.text = str
             let width = str.textWidth(font: label.font.pointSize, height: label.frame.size.height)
-            time = Double(width / 10)
             label.frame = CGRect(x:view.frame.size.height, y: 0, width: width, height: view.frame.size.width)
             label1.frame = CGRect(x:view.frame.size.height + width, y: 0, width: width, height: view.frame.size.width)
         }
@@ -100,6 +99,19 @@ class ViewController: UIViewController {
         self.startAnimate()
         self.addNotification()
         
+        Config.shareInstance.label = label
+        Config.shareInstance.startAnimation {
+            self.startAnimate()
+        }
+        configView.dismiss {
+            UIView.animate(withDuration: 0.45) {
+                self.textView.frame = CGRect(x: 20, y: self.view.viewHeight() - 60, width: self.view.viewWidth() - 60 - statusHeight, height: 44)
+            }
+        }
+        
+        for str in UIFont.familyNames {
+            print(str)
+        }
     }
     
     override var prefersStatusBarHidden: Bool{
@@ -118,6 +130,7 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.startAnimate()
         view.endEditing(true)
+        
     }
 
     func startAnimate(){
@@ -127,6 +140,9 @@ class ViewController: UIViewController {
     }
     
     @objc func showConfigView(){
+        UIView.animate(withDuration: 0.4) {
+            self.textView.frame = CGRect(x: 20, y: self.view.viewHeight() - 60 - statusHeight  + 120, width: self.view.viewWidth() - 60, height: 44)
+        }
         configView.showView()
     }
     
