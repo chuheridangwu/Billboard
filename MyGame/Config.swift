@@ -16,7 +16,7 @@ class Config {
     
     var label: UILabel!
     
-    var speed: CGFloat = 5{
+    var speed: CGFloat = 1{
         didSet{
             if callBack != nil {
                 callBack!()
@@ -27,24 +27,40 @@ class Config {
     var textColor: UIColor = .white{
         didSet{
             label.textColor = textColor
+            if callBack != nil {
+                callBack!()
+            }
         }
     }
     
     var fontSize: CGFloat =  16{
         didSet{
             label.font = UIFont.init(name: fontStyle, size: fontSize)
+            if callBack != nil {
+                callBack!()
+            }
         }
     }
     
     var fontStyle: String = ""{
         didSet{
-            label.font = UIFont.init(name: fontStyle, size: 120)
+            label.font = UIFont.init(name: fontStyle, size: fontSize)
+            if callBack != nil {
+                callBack!()
+            }
         }
     }
     
     var callBack: swiftBlock?
     
-    var isCycle: Bool = UserDefaults.standard.bool(forKey: cycle)
+    var isCycle: Bool = UserDefaults.standard.bool(forKey: cycle){
+        didSet{
+            if callBack != nil {
+                callBack!()
+            }
+        }
+    }
+    
     var isFlicker: Bool = UserDefaults.standard.bool(forKey: flicker)
 
  

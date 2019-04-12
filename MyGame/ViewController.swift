@@ -21,22 +21,14 @@ class ViewController: UIViewController {
     var time: TimeInterval = 5
     
     lazy var label :UILabel = {
-        let label = UILabel.init(frame: CGRect(x: view.frame.size.height, y:0, width: view.frame.size.height, height: view.frame.size.width))
-        label.font = UIFont.systemFont(ofSize: 100)
+        let label = UILabel.init(frame: CGRect(x: 0, y:0, width: view.frame.size.height, height: view.frame.size.width))
+        label.font = UIFont.init(name: "STHeitiTC-Medium", size: 120)
         label.textColor = .white
-        label.textAlignment = .left
-        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
-    lazy var label1 :UILabel = {
-        let label = UILabel.init(frame: CGRect(x: view.frame.size.height, y:0, width: view.frame.size.height, height: view.frame.size.width))
-        label.font = UIFont.systemFont(ofSize: 100)
-        label.textColor = .white
-        label.textAlignment = .left
-        label.backgroundColor = .red
-        label.numberOfLines = 1
-        return label
-    }()
+
     
     lazy var textView: UITextField = {
         let textView = UITextField.init(frame: CGRect(x: 20, y: view.viewHeight() - 60 - statusHeight, width: view.viewWidth() - 60, height: 44))
@@ -46,9 +38,11 @@ class ViewController: UIViewController {
         textView.backgroundColor = .white
         textView.delegate = self
         textView.borderStyle = .roundedRect
-        textView.text = "在这里输入要滚动的字幕"
         textView.textAlignment = .center
         textView.placeholder = "请在这里输入要滚动的字幕"
+//        textView.placeholder = "1"
+
+        subtitle = textView.placeholder
         return textView
     }()
     
@@ -65,11 +59,13 @@ class ViewController: UIViewController {
     
     var subtitle: String!{
         didSet{
-            let str: String! = subtitle
-            label.text = str
-            let width = str.textWidth(font: label.font.pointSize, height: label.frame.size.height)
-            label.frame = CGRect(x:view.frame.size.height, y: 0, width: width, height: view.frame.size.width)
-            label1.frame = CGRect(x:view.frame.size.height + width, y: 0, width: width, height: view.frame.size.width)
+            label.text = subtitle
+            label.sizeToFit()
+//            let str: String! = subtitle
+//            label.text = str
+//            let width = str.textWidth(font: label.font.pointSize, height: label.frame.size.height)
+//            label.frame = CGRect(x:view.frame.size.height, y: 0, width: width, height: view.frame.size.width)
+
         }
     }
     
@@ -85,23 +81,32 @@ class ViewController: UIViewController {
         let view = ConfigView.init(frame: self.view.bounds)
         return view
     }()
+    
+    lazy var cycleView: CycleScrollView = {
+       let cycleView = CycleScrollView.init(frame: CGRect(x: 0, y: 0, width: view.frame.size.height, height: view.frame.size.width))
+        return cycleView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         view.addSubview(contentView)
         contentView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
-        contentView.addSubview(label)
-        contentView.addSubview(label1)
+        contentView.addSubview(cycleView)
         view.addSubview(textView)
         view.addSubview(btn)
-
-        self.startAnimate()
+        label.sizeToFit()
         self.addNotification()
         
         Config.shareInstance.label = label
         Config.shareInstance.startAnimation {
-            self.startAnimate()
+            self.label.numberOfLines = 1
+            self.label.sizeToFit()
+            self.cycleView.stopCycle()
+            self.cycleView.isCycle = Config.shareInstance.isCycle
+            self.cycleView.seep = Config.shareInstance.speed
+            self.cycleView.views = [Config.shareInstance.label]
+            self.cycleView.fire()
         }
         configView.dismiss {
             UIView.animate(withDuration: 0.45) {
@@ -109,9 +114,8 @@ class ViewController: UIViewController {
             }
         }
         
-        for str in UIFont.familyNames {
-            print(str)
-        }
+        cycleView.views = [Config.shareInstance.label]
+        cycleView.fire()
     }
     
     override var prefersStatusBarHidden: Bool{
@@ -128,16 +132,11 @@ class ViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.startAnimate()
+
         view.endEditing(true)
         
     }
 
-    func startAnimate(){
-        subtitle = textView.text
-        self.label.layer.removeAnimation(forKey: "test")
-        self.label.layer.add(animation, forKey: "test")
-    }
     
     @objc func showConfigView(){
         UIView.animate(withDuration: 0.4) {
@@ -169,7 +168,6 @@ class ViewController: UIViewController {
 extension ViewController: UITextFieldDelegate{
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.startAnimate()
         textField.endEditing(true)
         return true
     }

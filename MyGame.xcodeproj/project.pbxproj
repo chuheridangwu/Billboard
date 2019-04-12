@@ -52,6 +52,7 @@
 		87C3614E225F27C9000570AF /* 嚒嚒爱情相随.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */; };
 		87C36150225F27D4000570AF /* FZXIANGSU12.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 87C3614F225F27D3000570AF /* FZXIANGSU12.TTF */; };
 		87C36159225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */; };
+		87C3615D225F31F9000570AF /* CycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C3615C225F31F9000570AF /* CycleScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "嚒嚒爱情相随.ttf"; sourceTree = "<group>"; };
 		87C3614F225F27D3000570AF /* FZXIANGSU12.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = FZXIANGSU12.TTF; sourceTree = "<group>"; };
 		87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PangMenZhengDaoCuShuTi-2.ttf"; sourceTree = "<group>"; };
+		87C3615C225F31F9000570AF /* CycleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 			children = (
 				87023BF92240C98C004700A9 /* AppDelegate.swift */,
 				87023BFB2240C98C004700A9 /* ViewController.swift */,
+				87C3615C225F31F9000570AF /* CycleScrollView.swift */,
 				30FDC4172246696C00DC8A31 /* ConfigView.swift */,
 				30FDC419224669B300DC8A31 /* Config.swift */,
 				87C3615B225F2E16000570AF /* FontSourse */,
@@ -369,6 +372,7 @@
 				871B71B42249FD8900479E2A /* ConstraintView+Extensions.swift in Sources */,
 				871B719C2249FD8900479E2A /* LayoutConstraintItem.swift in Sources */,
 				871B71AC2249FD8900479E2A /* ConstraintLayoutSupport.swift in Sources */,
+				87C3615D225F31F9000570AF /* CycleScrollView.swift in Sources */,
 				871B71A92249FD8900479E2A /* UILayoutSupport+Extensions.swift in Sources */,
 				871B71A12249FD8900479E2A /* ConstraintPriorityTarget.swift in Sources */,
 				871B71B52249FD8900479E2A /* ConstraintItem.swift in Sources */,

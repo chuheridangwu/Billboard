@@ -34,10 +34,10 @@ class ConfigView: UIView {
     let label3 = UIView.creatLabel(text: "字体")
     let label4 = UIView.creatLabel(text: "颜色")
 
-    let listAry1 = [0,0.5,1,1.5]
-    let listAry2 = [24,36,48,64,72]
+    let listAry1 = [0,0.5,1,2,3,5]
+    let listAry2 = [84,108,132,156,180]
     let listAry3 = [ViewType.FontStyle.style1,ViewType.FontStyle.style4,ViewType.FontStyle.style2,ViewType.FontStyle.style3]
-    let listAry4 = [UIColor.red,.yellow,.blue,.white]
+    let listAry4 = [UIColor.red,.yellow,.blue,.white,.orange]
 
     let view1 = BtnListView.init(frame: CGRect.zero)
     let view2 = BtnListView.init(frame: CGRect.zero)
@@ -129,7 +129,7 @@ class ConfigView: UIView {
         }
         view3.type = ViewType.style
         view3.viewAry = listAry3 as NSArray
-        view3.select = 2
+        view3.select = 3
         
         label4.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -145,7 +145,7 @@ class ConfigView: UIView {
         }
         view4.type = ViewType.color
         view4.viewAry = listAry4 as NSArray
-        view4.select = 2
+        view4.select = 0
         
         cellView1.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
@@ -214,16 +214,16 @@ class BtnListView: UIView{
                 case .style:
                     switch str as! ViewType.FontStyle{
                     case .style1:
-                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style1.rawValue, size: Config.shareInstance.fontSize)
+                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style1.rawValue, size: 16)
                         break
                     case .style2:
-                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style2.rawValue, size: Config.shareInstance.fontSize)
+                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style2.rawValue, size: 16)
                         break
                     case .style3:
-                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style3.rawValue, size: Config.shareInstance.fontSize)
+                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style3.rawValue, size: 16)
                         break
                     case .style4:
-                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style4.rawValue, size: Config.shareInstance.fontSize)
+                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style4.rawValue, size: 16)
                         break
                         
                     }
@@ -263,6 +263,7 @@ class BtnListView: UIView{
             if type == ViewType.color{
                 Config.shareInstance.textColor = viewAry[select] as! UIColor
             }
+            initValue()
         }
     }
     
@@ -279,8 +280,10 @@ class BtnListView: UIView{
     
     @objc func clickBtn(btn: UIButton) {
         select = btn.tag
+    }
+    
+    func initValue() {
         let str = viewAry[select]
-
         switch type{
         case .color:
             Config.shareInstance.textColor = viewAry[select] as! UIColor
@@ -349,8 +352,10 @@ class CellView: UIView {
     
     @objc func trunOn(switchBtn:UISwitch) {
         if type == 1{
+            Config.shareInstance.isCycle = switchBtn.isOn
             Config.shareInstance.saveValue(value: switchBtn.isOn, key: cycle)
         }else{
+            Config.shareInstance.isFlicker = switchBtn.isOn
             Config.shareInstance.saveValue(value: switchBtn.isOn, key: flicker)
         }
     }
