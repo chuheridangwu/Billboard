@@ -23,8 +23,14 @@ class CycleScrollView: UIScrollView {
                 label.numberOfLines = 0
                 label.frame = self.bounds
                 self.addSubview(label)
+                if Config.shareInstance.isFlicker{
+                    addOpacityAnimation(view: label)
+                }else{
+                    label.layer.removeAllAnimations()
+                }
                 return;
             }
+            
             let data = NSKeyedArchiver.archivedData(withRootObject: views.first ?? UIView.init())
             let view1 = NSKeyedUnarchiver.unarchiveObject(with: data) as! UIView
             let view2 = NSKeyedUnarchiver.unarchiveObject(with: data) as! UIView
@@ -108,7 +114,9 @@ class CycleScrollView: UIScrollView {
                     displayX = maxWidth
                 }
             }
-            
+            if Config.shareInstance.isFlicker {
+                addOpacityAnimation(view: view)
+            }
         }
         self.contentOffset = CGPoint(x: 0, y: 0)
     }
@@ -127,11 +135,25 @@ class CycleScrollView: UIScrollView {
     
     func stopCycle()  {
         self.subviews.forEach { (item) in
+            item.layer.removeAllAnimations()
             item.removeFromSuperview()
         }
         if (timer != nil){
             timer.invalidate()
         }
+    }
+    
+    let identfian = "labelAnimation"
+    private func addOpacityAnimation(view: UIView){
+        let animation = CABasicAnimation.init(keyPath: "opacity")
+        animation.fromValue = 1.0
+        animation.toValue = 0.4
+        animation.duration = 0.1
+        animation.repeatCount = MAXFLOAT
+        animation.isRemovedOnCompletion = false
+        animation.fillMode = .forwards
+        animation.timingFunction = CAMediaTimingFunction.init(name: CAMediaTimingFunctionName.easeIn)
+        view.layer.add(animation, forKey: identfian)
     }
     
 }

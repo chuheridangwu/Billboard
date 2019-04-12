@@ -61,7 +61,13 @@ class Config {
         }
     }
     
-    var isFlicker: Bool = UserDefaults.standard.bool(forKey: flicker)
+    var isFlicker: Bool = UserDefaults.standard.bool(forKey: flicker){
+        didSet{
+            if callBack != nil {
+                callBack!()
+            }
+        }
+    }
 
  
     
