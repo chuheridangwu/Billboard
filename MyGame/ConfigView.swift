@@ -22,6 +22,9 @@ enum ViewType {
         case style2 = "FZXS12"
         case style3 = "STHeitiTC-Medium"
         case style4 = "PangMenZhengDao-Cu"
+        case style5 = "HYXingYuTiJ"
+        case style6 = "HYSunWanMinCaoShuF"
+
     }
 }
 
@@ -36,7 +39,7 @@ class ConfigView: UIView {
 
     let listAry1 = [0,0.5,1,2,3,5]
     let listAry2 = [84,108,132,156,180]
-    let listAry3 = [ViewType.FontStyle.style1,ViewType.FontStyle.style4,ViewType.FontStyle.style2,ViewType.FontStyle.style3]
+    let listAry3 = [ViewType.FontStyle.style1,ViewType.FontStyle.style4,ViewType.FontStyle.style2,ViewType.FontStyle.style3,ViewType.FontStyle.style5,ViewType.FontStyle.style6]
     let listAry4 = [UIColor.red,.yellow,.blue,.white,.orange]
 
     let view1 = BtnListView.init(frame: CGRect.zero)
@@ -226,6 +229,12 @@ class BtnListView: UIView{
                     case .style4:
                         btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style4.rawValue, size: 16)
                         break
+                    case .style5:
+                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style5.rawValue, size: 16)
+                        break
+                    case .style6:
+                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style6.rawValue, size: 16)
+                        break
                         
                     }
                     btn.setTitle("样式", for: UIControl.State.normal)
@@ -305,6 +314,12 @@ class BtnListView: UIView{
                 break
             case .style4:
                 Config.shareInstance.fontStyle = ViewType.FontStyle.style4.rawValue
+                break
+            case .style5:
+                Config.shareInstance.fontStyle = ViewType.FontStyle.style5.rawValue
+                break
+            case .style6:
+                Config.shareInstance.fontStyle = ViewType.FontStyle.style6.rawValue
                 break
             }
             break
