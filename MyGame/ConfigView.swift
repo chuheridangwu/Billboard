@@ -163,7 +163,8 @@ class ConfigView: UIView {
     }
     
     
-    func showView(){
+    func showView(block: @escaping swiftBlock){
+        viewCallBack = block
         UIApplication.shared.keyWindow?.addSubview(self)
         UIView.animate(withDuration: 0.45, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 2.0, options: [], animations: {
             self.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)

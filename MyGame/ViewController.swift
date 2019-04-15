@@ -28,22 +28,33 @@ class ViewController: UIViewController {
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
+    
+    lazy var bottomView: UIView = {
+        let view1 = UIView.init(frame: CGRect(x: 0, y: view.viewHeight() - 60.0 - tabbarHeight, width: view.viewWidth(), height: 44))
+        view1.addSubview(textView)
+        view1.addSubview(setBtn)
+        return view1
+    }()
 
     
     lazy var textView: UITextField = {
-        let textView = UITextField.init(frame: CGRect(x: 20, y: view.viewHeight() - 60 - statusHeight, width: view.viewWidth() - 60, height: 44))
-        if #available(iOS 11, *){
-            textView.frame =  CGRect(x: 20, y: view.viewHeight() - 60 - view.safeAreaInsets.bottom, width: view.viewWidth() - 60, height: 44)
-        }
+        let textView = UITextField.init(frame: CGRect(x: 20, y: 0, width: view.viewWidth() - 80, height: 44))
         textView.backgroundColor = .white
         textView.delegate = self
         textView.borderStyle = .roundedRect
         textView.textAlignment = .center
-        textView.placeholder = "请在这里输入要滚动的字幕"
-//        textView.placeholder = "1"
-
+        textView.placeholder = "请在这里输入要滚动的字"
+        textView.layer.cornerRadius = 22
+        textView.layer.masksToBounds = true
         subtitle = textView.placeholder
         return textView
+    }()
+    
+    lazy var setBtn: UIButton = {
+        let btn = UIButton.init(frame: CGRect(x: view.viewWidth() - 55, y: 4.5, width: 35, height: 35))
+        btn.addTarget(self, action: #selector(showConfigView), for: UIControl.Event.touchUpInside)
+        btn.setBackgroundImage(UIImage.init(named: "setting.png"), for: UIControl.State.normal)
+        return btn
     }()
     
     lazy var animation: CABasicAnimation = {
@@ -60,22 +71,8 @@ class ViewController: UIViewController {
     var subtitle: String!{
         didSet{
             label.text = subtitle
-            label.sizeToFit()
-//            let str: String! = subtitle
-//            label.text = str
-//            let width = str.textWidth(font: label.font.pointSize, height: label.frame.size.height)
-//            label.frame = CGRect(x:view.frame.size.height, y: 0, width: width, height: view.frame.size.width)
-
         }
     }
-    
-    lazy var btn: UIButton = {
-        let btn = UIButton.init(type: UIButton.ButtonType.custom)
-        btn.addTarget(self, action: #selector(showConfigView), for: UIControl.Event.touchUpInside)
-        btn.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
-        btn.backgroundColor = .yellow
-        return btn
-    }()
 
     lazy var configView: ConfigView = {
         let view = ConfigView.init(frame: self.view.bounds)
@@ -93,20 +90,13 @@ class ViewController: UIViewController {
         view.addSubview(contentView)
         contentView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
         contentView.addSubview(cycleView)
-        view.addSubview(textView)
-        view.addSubview(btn)
+        view.addSubview(bottomView)
         label.sizeToFit()
         self.addNotification()
-        
+
         Config.shareInstance.label = label
         Config.shareInstance.startAnimation {
-            self.label.numberOfLines = 1
-            self.label.sizeToFit()
-            self.cycleView.stopCycle()
-            self.cycleView.isCycle = Config.shareInstance.isCycle
-            self.cycleView.seep = Config.shareInstance.speed
-            self.cycleView.views = [Config.shareInstance.label]
-            self.cycleView.fire()
+            self.startAnimation()
         }
         configView.dismiss {
             UIView.animate(withDuration: 0.45) {
@@ -132,17 +122,37 @@ class ViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        isHiddenBottomView()
         view.endEditing(true)
-        
     }
 
+    func startAnimation()  {
+        self.label.numberOfLines = 1
+        self.label.sizeToFit()
+        self.cycleView.stopCycle()
+        self.cycleView.isCycle = Config.shareInstance.isCycle
+        self.cycleView.seep = Config.shareInstance.speed
+        self.cycleView.views = [Config.shareInstance.label]
+        self.cycleView.fire()
+    }
     
     @objc func showConfigView(){
-        UIView.animate(withDuration: 0.4) {
-            self.textView.frame = CGRect(x: 20, y: self.view.viewHeight() - 60 - statusHeight  + 120, width: self.view.viewWidth() - 60, height: 44)
+        isHiddenBottomView()
+        configView.showView {
+            self.isHiddenBottomView()
         }
-        configView.showView()
+    }
+    
+    private func isHiddenBottomView() {
+        if bottomView.frame.origin.y > view.viewHeight() {
+            UIView.animate(withDuration: 0.35) {
+                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 60 - tabbarHeight, width: self.view.viewWidth(), height: 44)
+            }
+        }else{
+            UIView.animate(withDuration: 0.4) {
+                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 60 - tabbarHeight  + 120, width: self.view.viewWidth(), height: 44)
+            }
+        }
     }
     
     @objc func keyBoardWillShow(_ notification:Notification) {
@@ -151,7 +161,7 @@ class ViewController: UIViewController {
         let time = info["UIKeyboardAnimationDurationUserInfoKey"]
         
         UIView.animate(withDuration: time as! TimeInterval) {
-            self.textView.frame = CGRect(x: 20, y: self.view.viewHeight() - keyboardSize.size.height - 44 -  statusHeight - 20, width: self.view.viewWidth() - 60, height: 44)
+            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - keyboardSize.size.height - 44 -  tabbarHeight - 20, width: self.view.viewWidth(), height: 44)
         }
     }
     
@@ -160,7 +170,7 @@ class ViewController: UIViewController {
         let time = info["UIKeyboardAnimationDurationUserInfoKey"]
         
         UIView.animate(withDuration: time as! TimeInterval) {
-            self.textView.frame = CGRect(x: 20, y: self.view.viewHeight() - 60, width: self.view.viewWidth() - 60 - statusHeight, height: 44)
+            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() -  44 -  tabbarHeight - 20, width: self.view.viewWidth(), height: 44)
         }
     }
 }
@@ -168,6 +178,8 @@ class ViewController: UIViewController {
 extension ViewController: UITextFieldDelegate{
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        subtitle = textField.text
+        startAnimation()
         textField.endEditing(true)
         return true
     }

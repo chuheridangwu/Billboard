@@ -81,6 +81,7 @@ class CycleScrollView: UIScrollView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         startX = frame.size.width
+        isUserInteractionEnabled = false
     }
     
     required init?(coder aDecoder: NSCoder) {
