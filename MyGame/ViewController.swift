@@ -11,7 +11,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let time: TimeInterval = 10
+    let time: TimeInterval = 8
     
     lazy var contentView :UIView = {
        let view = UIView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.height, height: self.view.bounds.size.width))
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }()
     
     lazy var bottomView: UIView = {
-        let view1 = UIView.init(frame: CGRect(x: 0, y: view.viewHeight() - 60.0 - tabbarHeight, width: view.viewWidth(), height: 44))
+        let view1 = UIView.init(frame: CGRect(x: 0, y: view.viewHeight() - 64.0 - tabbarHeight, width: view.viewWidth(), height: 44))
         view1.addSubview(textView)
         view1.addSubview(setBtn)
         return view1
@@ -92,9 +92,7 @@ class ViewController: UIViewController {
             self.startAnimation()
         }
         configView.dismiss {
-            UIView.animate(withDuration: 0.45) {
-                self.textView.frame = CGRect(x: 20, y: self.view.viewHeight() - 60, width: self.view.viewWidth() - 60 - statusHeight, height: 44)
-            }
+            self.isHiddenBottomView()
         }
         
         cycleView.views = [Config.shareInstance.label]
@@ -142,7 +140,7 @@ class ViewController: UIViewController {
         if bottomView.frame.origin.y > view.viewHeight() {
             timer.fireDate = Date.init(timeIntervalSinceNow: time)
             UIView.animate(withDuration: 0.35) {
-                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 60 - tabbarHeight, width: self.view.viewWidth(), height: 44)
+                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 64 - tabbarHeight, width: self.view.viewWidth(), height: 44)
             }
         }else{
             closeBottomView()
@@ -166,7 +164,7 @@ class ViewController: UIViewController {
         let time = info["UIKeyboardAnimationDurationUserInfoKey"]
         
         UIView.animate(withDuration: time as! TimeInterval) {
-            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - keyboardSize.size.height - 44 -  tabbarHeight - 20, width: self.view.viewWidth(), height: 44)
+            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - keyboardSize.size.height - 64 -  tabbarHeight, width: self.view.viewWidth(), height: 44)
         }
     }
     
@@ -175,7 +173,7 @@ class ViewController: UIViewController {
         let time = info["UIKeyboardAnimationDurationUserInfoKey"]
         
         UIView.animate(withDuration: time as! TimeInterval) {
-            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() -  44 -  tabbarHeight - 20, width: self.view.viewWidth(), height: 44)
+            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() -  64 -  tabbarHeight , width: self.view.viewWidth(), height: 44)
         }
     }
 }

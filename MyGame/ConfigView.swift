@@ -50,6 +50,17 @@ class ConfigView: UIView {
     let cellView1 = CellView.init(frame: CGRect.zero)
     let cellView2 = CellView.init(frame: CGRect.zero)
     
+    lazy var closeBtn: UIButton = {
+        let btn = UIButton.init(type: UIButton.ButtonType.custom)
+        btn.setTitle("完成", for: UIControl.State.normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btn.addTarget(self, action: #selector(dismissView), for: UIControl.Event.touchUpInside)
+        btn.layer.cornerRadius = 22
+        btn.layer.borderColor = UIColor.white.cgColor
+        btn.layer.borderWidth = 2
+        return btn
+    }()
+    
     var viewCallBack: swiftBlock?
     
         
@@ -59,6 +70,7 @@ class ConfigView: UIView {
         backView.frame = self.bounds
         addSubview(backView)
         addSubview(contentView)
+        addSubview(closeBtn)
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(dismissView))
         backView.addGestureRecognizer(tap)
         contentView.alpha = 0.8
@@ -85,6 +97,11 @@ class ConfigView: UIView {
                 make.height.equalTo(contentH)
         }
         
+        closeBtn.snp.makeConstraints { (make) in
+            make.right.equalTo(-5)
+            make.width.height.equalTo(44)
+            make.bottom.equalTo(contentView.snp.top).offset(22)
+        }
         
         label1.snp.makeConstraints { (make) in
             make.left.equalTo(10)
