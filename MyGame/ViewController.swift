@@ -10,15 +10,14 @@ import UIKit
 
 
 class ViewController: UIViewController {
-
+    
+    let time: TimeInterval = 10
     
     lazy var contentView :UIView = {
        let view = UIView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.height, height: self.view.bounds.size.width))
         view.center = self.view.center
         return view;
     }()
-    
-    var time: TimeInterval = 5
     
     lazy var label :UILabel = {
         let label = UILabel.init(frame: CGRect(x: 0, y:0, width: view.frame.size.height, height: view.frame.size.width))
@@ -35,7 +34,6 @@ class ViewController: UIViewController {
         view1.addSubview(setBtn)
         return view1
     }()
-
     
     lazy var textView: UITextField = {
         let textView = UITextField.init(frame: CGRect(x: 20, y: 0, width: view.viewWidth() - 80, height: 44))
@@ -57,15 +55,10 @@ class ViewController: UIViewController {
         return btn
     }()
     
-    lazy var animation: CABasicAnimation = {
-        let min = label.viewWidth() / screenHeight * Config.shareInstance.speed;
-        let animation = CABasicAnimation.init(keyPath: "transform.translation.x")
-        animation.toValue = -(label.frame.size.width + view.bounds.size.height)
-        animation.duration = CFTimeInterval(min)
-        animation.isRemovedOnCompletion = false
-        animation.repeatCount = MAXFLOAT
-        animation.delegate = self
-        return animation
+    lazy var timer: Timer = {
+        let timer = Timer.init(timeInterval: time, target: self, selector: #selector(closeBottomView), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer, forMode: RunLoop.Mode.common)
+        return timer
     }()
     
     var subtitle: String!{
@@ -106,6 +99,7 @@ class ViewController: UIViewController {
         
         cycleView.views = [Config.shareInstance.label]
         cycleView.fire()
+        timer.fireDate = Date.init(timeIntervalSinceNow: time)
     }
     
     override var prefersStatusBarHidden: Bool{
@@ -143,18 +137,29 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: - 是否隐藏底部视图
     private func isHiddenBottomView() {
         if bottomView.frame.origin.y > view.viewHeight() {
+            timer.fireDate = Date.init(timeIntervalSinceNow: time)
             UIView.animate(withDuration: 0.35) {
                 self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 60 - tabbarHeight, width: self.view.viewWidth(), height: 44)
             }
         }else{
+            closeBottomView()
+        }
+    }
+    
+    // MARK: - 隐藏底部视图
+    @objc func closeBottomView() {
+        timer.fireDate = Date.distantFuture
+        if bottomView.frame.origin.y < view.viewHeight() {
             UIView.animate(withDuration: 0.4) {
                 self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 60 - tabbarHeight  + 120, width: self.view.viewWidth(), height: 44)
             }
         }
     }
     
+    // MARK: - 键盘通知
     @objc func keyBoardWillShow(_ notification:Notification) {
         let info : NSDictionary = notification.userInfo! as NSDictionary
         let keyboardSize = info["UIKeyboardFrameBeginUserInfoKey"] as! CGRect
@@ -180,6 +185,7 @@ extension ViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         subtitle = textField.text
         startAnimation()
+        isHiddenBottomView()
         textField.endEditing(true)
         return true
     }
