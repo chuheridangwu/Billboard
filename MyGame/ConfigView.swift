@@ -38,7 +38,7 @@ class ConfigView: UIView {
     let label4 = UIView.creatLabel(text: "颜色")
 
     let listAry1 = [0,0.5,1,2,3,5]
-    let listAry2 = [84,108,132,156,180]
+    let listAry2 = [90,128,146,188,200,220]
     let listAry3 = [ViewType.FontStyle.style1,ViewType.FontStyle.style4,ViewType.FontStyle.style2,ViewType.FontStyle.style3,ViewType.FontStyle.style5,ViewType.FontStyle.style6]
     let listAry4 = [UIColor.red,.yellow,.blue,.white,.orange]
 
@@ -133,7 +133,7 @@ class ConfigView: UIView {
         }
         view2.type = ViewType.fontSize
         view2.viewAry = listAry2 as NSArray
-        view2.select = 2
+        view2.select = 3
         
         label3.snp.makeConstraints { (make) in
             make.left.equalTo(10)

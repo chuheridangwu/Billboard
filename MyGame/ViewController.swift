@@ -11,7 +11,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let time: TimeInterval = 8
+    let animationTime: TimeInterval = 8
     
     lazy var contentView :UIView = {
        let view = UIView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.height, height: self.view.bounds.size.width))
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     }()
     
     lazy var timer: Timer = {
-        let timer = Timer.init(timeInterval: time, target: self, selector: #selector(closeBottomView), userInfo: nil, repeats: true)
+        let timer = Timer.init(timeInterval: animationTime, target: self, selector: #selector(closeBottomView), userInfo: nil, repeats: true)
         RunLoop.current.add(timer, forMode: RunLoop.Mode.common)
         return timer
     }()
@@ -97,7 +97,7 @@ class ViewController: UIViewController {
         
         cycleView.views = [Config.shareInstance.label]
         cycleView.fire()
-        timer.fireDate = Date.init(timeIntervalSinceNow: time)
+        timer.fireDate = Date.init(timeIntervalSinceNow: animationTime)
     }
     
     override var prefersStatusBarHidden: Bool{
@@ -138,7 +138,7 @@ class ViewController: UIViewController {
     // MARK: - 是否隐藏底部视图
     private func isHiddenBottomView() {
         if bottomView.frame.origin.y > view.viewHeight() {
-            timer.fireDate = Date.init(timeIntervalSinceNow: time)
+            timer.fireDate = Date.init(timeIntervalSinceNow: animationTime)
             UIView.animate(withDuration: 0.35) {
                 self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 64 - tabbarHeight, width: self.view.viewWidth(), height: 44)
             }
@@ -150,9 +150,13 @@ class ViewController: UIViewController {
     // MARK: - 隐藏底部视图
     @objc func closeBottomView() {
         timer.fireDate = Date.distantFuture
-        if bottomView.frame.origin.y < view.viewHeight() {
+        if bottomView.frame.origin.y < view.viewHeight() && bottomView.frame.origin.y >= self.view.viewHeight() - 64 - tabbarHeight  {
             UIView.animate(withDuration: 0.4) {
-                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 60 - tabbarHeight  + 120, width: self.view.viewWidth(), height: 44)
+                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 64 - tabbarHeight + 120, width: self.view.viewWidth(), height: 44)
+            }
+        }else{
+            UIView.animate(withDuration: 0.4) {
+                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 64 - tabbarHeight , width: self.view.viewWidth(), height: 44)
             }
         }
     }
@@ -162,6 +166,7 @@ class ViewController: UIViewController {
         let info : NSDictionary = notification.userInfo! as NSDictionary
         let keyboardSize = info["UIKeyboardFrameBeginUserInfoKey"] as! CGRect
         let time = info["UIKeyboardAnimationDurationUserInfoKey"]
+        timer.fireDate = Date.distantFuture
         
         UIView.animate(withDuration: time as! TimeInterval) {
             self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - keyboardSize.size.height - 64 -  tabbarHeight, width: self.view.viewWidth(), height: 44)
@@ -171,7 +176,7 @@ class ViewController: UIViewController {
     @objc func keyBoardWillhidden(_ notification: Notification)  {
         let info : NSDictionary = notification.userInfo! as NSDictionary
         let time = info["UIKeyboardAnimationDurationUserInfoKey"]
-        
+        timer.fireDate = Date.init(timeIntervalSinceNow: animationTime)
         UIView.animate(withDuration: time as! TimeInterval) {
             self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() -  64 -  tabbarHeight , width: self.view.viewWidth(), height: 44)
         }
@@ -181,9 +186,8 @@ class ViewController: UIViewController {
 extension ViewController: UITextFieldDelegate{
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        subtitle = textField.text
+        subtitle = textField.text?.count ?? 0 > 0 ? textField.text : textField.placeholder
         startAnimation()
-        isHiddenBottomView()
         textField.endEditing(true)
         return true
     }
