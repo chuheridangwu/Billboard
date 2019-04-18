@@ -19,7 +19,6 @@ enum ViewType {
     case style
     enum FontStyle: String {
         case style1 = "Helvetica-Bold"
-        case style2 = "FZXS12"
         case style3 = "STHeitiTC-Medium"
         case style4 = "PangMenZhengDao-Cu"
         case style5 = "HYXingYuTiJ"
@@ -37,9 +36,9 @@ class ConfigView: UIView {
     let label3 = UIView.creatLabel(text: "字体")
     let label4 = UIView.creatLabel(text: "颜色")
 
-    let listAry1 = [0,0.5,1,2,3,5]
+    let listAry1 = [0.5,1,2,3,4,5]
     let listAry2 = [90,128,146,188,200,220]
-    let listAry3 = [ViewType.FontStyle.style1,ViewType.FontStyle.style4,ViewType.FontStyle.style2,ViewType.FontStyle.style3,ViewType.FontStyle.style5,ViewType.FontStyle.style6]
+    let listAry3 = [ViewType.FontStyle.style1,ViewType.FontStyle.style4,ViewType.FontStyle.style3,ViewType.FontStyle.style5,ViewType.FontStyle.style6]
     let listAry4 = [UIColor.red,.yellow,.blue,.white,.orange]
 
     let view1 = BtnListView.init(frame: CGRect.zero)
@@ -149,7 +148,7 @@ class ConfigView: UIView {
         }
         view3.type = ViewType.style
         view3.viewAry = listAry3 as NSArray
-        view3.select = 3
+        view3.select = 2
         
         label4.snp.makeConstraints { (make) in
             make.left.equalTo(10)
@@ -173,6 +172,7 @@ class ConfigView: UIView {
             make.height.equalTo(35)
         }
         cellView1.type = 1
+        
         cellView2.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
             make.top.equalTo(cellView1.snp.bottom).offset(marginHeight)
@@ -236,9 +236,6 @@ class BtnListView: UIView{
                     switch str as! ViewType.FontStyle{
                     case .style1:
                         btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style1.rawValue, size: 16)
-                        break
-                    case .style2:
-                        btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style2.rawValue, size: 16)
                         break
                     case .style3:
                         btn.titleLabel?.font = UIFont.init(name: ViewType.FontStyle.style3.rawValue, size: 16)
@@ -323,9 +320,6 @@ class BtnListView: UIView{
             case .style1:
                 Config.shareInstance.fontStyle = ViewType.FontStyle.style1.rawValue
                 break
-            case .style2:
-                Config.shareInstance.fontStyle = ViewType.FontStyle.style2.rawValue
-                break
             case .style3:
                 Config.shareInstance.fontStyle = ViewType.FontStyle.style3.rawValue
                 break
@@ -380,6 +374,10 @@ class CellView: UIView {
         switchBtn.snp.makeConstraints { (make) in
             make.right.equalTo(-15)
             make.centerY.equalTo(titleLabel)
+        }
+        if type == 1{
+            switchBtn.isOn = true
+            trunOn(switchBtn: switchBtn)
         }
     }
     
