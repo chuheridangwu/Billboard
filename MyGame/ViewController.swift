@@ -130,9 +130,13 @@ class ViewController: UIViewController {
     
     @objc func showConfigView(){
         isHiddenBottomView()
-        configView.showView {
+//        configView.showView {
+//            self.isHiddenBottomView()
+//        }
+        configView.showView(showController: self) {
             self.isHiddenBottomView()
         }
+        AdmobTool.sharedManager.showInterstitial(showController: self)
     }
     
     // MARK: - 是否隐藏底部视图

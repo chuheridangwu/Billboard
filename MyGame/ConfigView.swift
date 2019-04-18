@@ -29,7 +29,7 @@ enum ViewType {
 
 class ConfigView: UIView {
 
-    let backView = UIView.init(frame: CGRect.zero)
+    let backView = UIButton.init(frame: CGRect.zero)
     let contentView = UIView.init(frame: CGRect.zero)
     let label1 = UIView.creatLabel(text: "速度")
     let label2 = UIView.creatLabel(text: "字号")
@@ -70,8 +70,7 @@ class ConfigView: UIView {
         addSubview(backView)
         addSubview(contentView)
         addSubview(closeBtn)
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(dismissView))
-        backView.addGestureRecognizer(tap)
+        backView.addTarget(self, action: #selector(dismissView), for: UIControl.Event.touchUpInside)
         contentView.alpha = 0.8
         contentView.backgroundColor = .black
         
@@ -183,9 +182,9 @@ class ConfigView: UIView {
     }
     
     
-    func showView(block: @escaping swiftBlock){
+    func showView(showController: UIViewController,block: @escaping swiftBlock){
         viewCallBack = block
-        UIApplication.shared.keyWindow?.addSubview(self)
+        showController.view.addSubview(self)
         UIView.animate(withDuration: 0.45, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 2.0, options: [], animations: {
             self.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
         }, completion: nil)
