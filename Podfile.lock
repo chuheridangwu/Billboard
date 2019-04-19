@@ -28,9 +28,11 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - QQ_XGPush (3.2.2)
 
 DEPENDENCIES:
   - Google-Mobile-Ads-SDK
+  - QQ_XGPush
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -38,13 +40,15 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - nanopb
+    - QQ_XGPush
 
 SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: 8f4f7e793bfd3fff5b082181b54112f81b579a67
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  QQ_XGPush: ab74daad9c70491fe9e97d12bc8cc04115b4fef5
 
-PODFILE CHECKSUM: eccc63f2cf9b91d537ca6607d36161a4fbc76800
+PODFILE CHECKSUM: 6d4a7962b531f503b55180232a82995bd39e656a
 
 COCOAPODS: 1.6.0.beta.2

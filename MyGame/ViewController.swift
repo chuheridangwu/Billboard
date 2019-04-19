@@ -130,9 +130,6 @@ class ViewController: UIViewController {
     
     @objc func showConfigView(){
         isHiddenBottomView()
-//        configView.showView {
-//            self.isHiddenBottomView()
-//        }
         configView.showView(showController: self) {
             self.isHiddenBottomView()
         }
