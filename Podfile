@@ -5,5 +5,6 @@ target 'MyGame' do
   pod 'Google-Mobile-Ads-SDK'
 
   pod 'QQ_XGPush'
+  pod 'Bugly'
 
 end

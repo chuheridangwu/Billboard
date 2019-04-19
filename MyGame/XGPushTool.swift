@@ -73,7 +73,7 @@ extension XGPushTool{
         let timeTrigger = UNTimeIntervalNotificationTrigger.init(timeInterval:7 * 24 * 60 * 60, repeats: true)
         let content = UNMutableNotificationContent.init()
         content.body = contentString
-        content.badge = 1
+//        content.badge = 1
         content.title = "爱你哟！小静子"
         content.sound = UNNotificationSound.default
         let request = UNNotificationRequest(identifier: "identifier", content: content, trigger: timeTrigger)

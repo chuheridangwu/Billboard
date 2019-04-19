@@ -10,6 +10,7 @@
 #define MyGame_bridging_Header_h
 
 #import "XGPush.h"
+#import <Bugly/Bugly.h>
 #import <UserNotifications/UserNotifications.h>
 
 #endif /* MyGame_bridging_Header_h */

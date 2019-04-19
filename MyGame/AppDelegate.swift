@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AdmobTool.sharedManager.startInitialize()
         XGPushTool.sharedManager.startInitialize()
-        
+        Bugly.start(withAppId: "893483aabd")
         return true
     }
 
