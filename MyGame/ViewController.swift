@@ -116,6 +116,15 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         isHiddenBottomView()
         view.endEditing(true)
+        
+        let productIdentifiers: Set<String> = ["com.dym.1"]
+        StoreTool.startInitialize.start(productIdentifiers: productIdentifiers, successBlock: { () -> Order in
+            return (productIdentifiers: productIdentifiers.first!, userName: "appStore")
+        }, receiptBlock: { (receipt, transaction, queue) in
+            
+        }) { (error) in
+            
+        }
     }
 
     func startAnimation()  {
@@ -129,6 +138,7 @@ class ViewController: UIViewController {
     }
     
     @objc func showConfigView(){
+        view.endEditing(true)
         isHiddenBottomView()
         configView.showView(showController: self) {
             self.isHiddenBottomView()

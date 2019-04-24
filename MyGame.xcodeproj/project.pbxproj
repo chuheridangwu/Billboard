@@ -53,6 +53,7 @@
 		871B71BB2249FD8900479E2A /* ConstraintLayoutGuide+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B718F2249FD8800479E2A /* ConstraintLayoutGuide+Extensions.swift */; };
 		871B71BC2249FD8900479E2A /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B71902249FD8800479E2A /* ConstraintLayoutSupportDSL.swift */; };
 		871B71BD2249FD8900479E2A /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B71912249FD8800479E2A /* ConstraintMakerRelatable.swift */; };
+		877821A4226F2ED400CC48E9 /* StoreTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877821A3226F2ED400CC48E9 /* StoreTool.swift */; };
 		87C3614E225F27C9000570AF /* 嚒嚒爱情相随.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */; };
 		87C36159225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */; };
 		87C3615D225F31F9000570AF /* CycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C3615C225F31F9000570AF /* CycleScrollView.swift */; };
@@ -135,6 +136,7 @@
 		871B71902249FD8800479E2A /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
 		871B71912249FD8800479E2A /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
 		871B71922249FD8800479E2A /* SnapKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SnapKit.xcodeproj; sourceTree = "<group>"; };
+		877821A3226F2ED400CC48E9 /* StoreTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTool.swift; sourceTree = "<group>"; };
 		87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "嚒嚒爱情相随.ttf"; sourceTree = "<group>"; };
 		87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PangMenZhengDaoCuShuTi-2.ttf"; sourceTree = "<group>"; };
 		87C3615C225F31F9000570AF /* CycleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleScrollView.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				30FDC419224669B300DC8A31 /* Config.swift */,
 				87194404226856130083AF12 /* AdmobTool.swift */,
 				8719441122687C5D0083AF12 /* XGPushTool.swift */,
+				877821A3226F2ED400CC48E9 /* StoreTool.swift */,
 				8719441322687DCE0083AF12 /* MyGame-bridging-Header.h */,
 				87F874BD226473D500ED9ED7 /* Localizable.strings */,
 				87F874C6226474CF00ED9ED7 /* InfoPlist.strings */,
@@ -495,6 +498,7 @@
 				871B71B72249FD8900479E2A /* Debugging.swift in Sources */,
 				871B71B42249FD8900479E2A /* ConstraintView+Extensions.swift in Sources */,
 				87194407226856130083AF12 /* AdmobTool.swift in Sources */,
+				877821A4226F2ED400CC48E9 /* StoreTool.swift in Sources */,
 				871B719C2249FD8900479E2A /* LayoutConstraintItem.swift in Sources */,
 				871B71AC2249FD8900479E2A /* ConstraintLayoutSupport.swift in Sources */,
 				87C3615D225F31F9000570AF /* CycleScrollView.swift in Sources */,

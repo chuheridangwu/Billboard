@@ -35,16 +35,22 @@ class ConfigView: UIView {
     let label2 = UIView.creatLabel(text: "字号")
     let label3 = UIView.creatLabel(text: "字体")
     let label4 = UIView.creatLabel(text: "颜色")
+    let label5 = UIView.creatLabel(text: "背景颜色")
+
 
     let listAry1 = [0.5,1,2,3,4,5]
     let listAry2 = [90,128,146,188,200,220]
     let listAry3 = [ViewType.FontStyle.style1,ViewType.FontStyle.style4,ViewType.FontStyle.style3,ViewType.FontStyle.style5,ViewType.FontStyle.style6]
-    let listAry4 = [UIColor.red,.yellow,.blue,.white,.orange]
+    let listAry4 = [UIColor.red,.yellow,.blue,.white,.orange,.black]
+    let listAry5 = [UIColor.red,.yellow,.blue,.white,.orange,.black]
+
 
     let view1 = BtnListView.init(frame: CGRect.zero)
     let view2 = BtnListView.init(frame: CGRect.zero)
     let view3 = BtnListView.init(frame: CGRect.zero)
     let view4 = BtnListView.init(frame: CGRect.zero)
+    let view5 = BtnListView.init(frame: CGRect.zero)
+
     
     let cellView1 = CellView.init(frame: CGRect.zero)
     let cellView2 = CellView.init(frame: CGRect.zero)
@@ -78,10 +84,12 @@ class ConfigView: UIView {
         contentView.addSubview(label2)
         contentView.addSubview(label3)
         contentView.addSubview(label4)
+        contentView.addSubview(label5)
         contentView.addSubview(view1)
         contentView.addSubview(view2)
         contentView.addSubview(view3)
         contentView.addSubview(view4)
+        contentView.addSubview(view5)
         contentView.addSubview(cellView1)
         contentView.addSubview(cellView2)
 
@@ -165,9 +173,25 @@ class ConfigView: UIView {
         view4.viewAry = listAry4 as NSArray
         view4.select = 0
         
+        label5.snp.makeConstraints { (make) in
+            make.left.equalTo(10)
+            make.right.equalTo(-10)
+            make.top.equalTo(view4.snp.bottom).offset(marginHeight)
+            make.height.equalTo(labelHeight)
+        }
+        
+        view5.snp.makeConstraints { (make) in
+            make.left.right.equalTo(0)
+            make.top.equalTo(label5.snp.bottom).offset(marginHeight)
+            make.height.equalTo(width)
+        }
+        view5.type = ViewType.color
+        view5.viewAry = listAry4 as NSArray
+        view5.select = 4
+        
         cellView1.snp.makeConstraints { (make) in
             make.left.right.equalTo(0)
-            make.top.equalTo(view4.snp.bottom).offset(marginHeight)
+            make.top.equalTo(view5.snp.bottom).offset(marginHeight)
             make.height.equalTo(35)
         }
         cellView1.type = 1
