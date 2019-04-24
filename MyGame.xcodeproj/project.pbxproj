@@ -206,9 +206,7 @@
 				87C3615C225F31F9000570AF /* CycleScrollView.swift */,
 				30FDC4172246696C00DC8A31 /* ConfigView.swift */,
 				30FDC419224669B300DC8A31 /* Config.swift */,
-				87194404226856130083AF12 /* AdmobTool.swift */,
-				8719441122687C5D0083AF12 /* XGPushTool.swift */,
-				877821A3226F2ED400CC48E9 /* StoreTool.swift */,
+				877821B022704EDC00CC48E9 /* Tool */,
 				8719441322687DCE0083AF12 /* MyGame-bridging-Header.h */,
 				87F874BD226473D500ED9ED7 /* Localizable.strings */,
 				87F874C6226474CF00ED9ED7 /* InfoPlist.strings */,
@@ -289,6 +287,16 @@
 				871B71C62249FE7500479E2A /* SnapKit Tests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		877821B022704EDC00CC48E9 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				877821A3226F2ED400CC48E9 /* StoreTool.swift */,
+				8719441122687C5D0083AF12 /* XGPushTool.swift */,
+				87194404226856130083AF12 /* AdmobTool.swift */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		87C3615B225F2E16000570AF /* FontSourse */ = {

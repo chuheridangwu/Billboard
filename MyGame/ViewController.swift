@@ -100,34 +100,21 @@ class ViewController: UIViewController {
         timer.fireDate = Date.init(timeIntervalSinceNow: animationTime)
     }
     
-    override var prefersStatusBarHidden: Bool{
-        return true
-    }
-
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func addNotification(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillhidden(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    
+    override var prefersStatusBarHidden: Bool{
+        return true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         isHiddenBottomView()
         view.endEditing(true)
-        
-        let productIdentifiers: Set<String> = ["com.dym.1"]
-        StoreTool.startInitialize.start(productIdentifiers: productIdentifiers, successBlock: { () -> Order in
-            return (productIdentifiers: productIdentifiers.first!, userName: "appStore")
-        }, receiptBlock: { (receipt, transaction, queue) in
-            
-        }) { (error) in
-            
-        }
     }
 
-    func startAnimation()  {
+  fileprivate  func startAnimation()  {
         self.label.numberOfLines = 1
         self.label.sizeToFit()
         self.cycleView.stopCycle()
@@ -172,26 +159,6 @@ class ViewController: UIViewController {
         }
     }
     
-    // MARK: - 键盘通知
-    @objc func keyBoardWillShow(_ notification:Notification) {
-        let info : NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardSize = info["UIKeyboardFrameBeginUserInfoKey"] as! CGRect
-        let time = info["UIKeyboardAnimationDurationUserInfoKey"]
-        timer.fireDate = Date.distantFuture
-        
-        UIView.animate(withDuration: time as! TimeInterval) {
-            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - keyboardSize.size.height - 64 -  tabbarHeight, width: self.view.viewWidth(), height: 44)
-        }
-    }
-    
-    @objc func keyBoardWillhidden(_ notification: Notification)  {
-        let info : NSDictionary = notification.userInfo! as NSDictionary
-        let time = info["UIKeyboardAnimationDurationUserInfoKey"]
-        timer.fireDate = Date.init(timeIntervalSinceNow: animationTime)
-        UIView.animate(withDuration: time as! TimeInterval) {
-            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() -  64 -  tabbarHeight , width: self.view.viewWidth(), height: 44)
-        }
-    }
 }
 
 extension ViewController: UITextFieldDelegate{
@@ -214,4 +181,32 @@ extension ViewController: CAAnimationDelegate{
     }
 }
 
+// MARK: - 键盘
+extension ViewController{
+    
+    fileprivate  func addNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillhidden(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+   
+    @objc func keyBoardWillShow(_ notification:Notification) {
+        let info : NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardSize = info["UIKeyboardFrameBeginUserInfoKey"] as! CGRect
+        let time = info["UIKeyboardAnimationDurationUserInfoKey"]
+        timer.fireDate = Date.distantFuture
+        
+        UIView.animate(withDuration: time as! TimeInterval) {
+            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - keyboardSize.size.height - 64 -  tabbarHeight, width: self.view.viewWidth(), height: 44)
+        }
+    }
+    
+    @objc func keyBoardWillhidden(_ notification: Notification)  {
+        let info : NSDictionary = notification.userInfo! as NSDictionary
+        let time = info["UIKeyboardAnimationDurationUserInfoKey"]
+        timer.fireDate = Date.init(timeIntervalSinceNow: animationTime)
+        UIView.animate(withDuration: time as! TimeInterval) {
+            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() -  64 -  tabbarHeight , width: self.view.viewWidth(), height: 44)
+        }
+    }
+}
 
