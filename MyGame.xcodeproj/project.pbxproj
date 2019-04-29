@@ -54,6 +54,8 @@
 		871B71BC2249FD8900479E2A /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B71902249FD8800479E2A /* ConstraintLayoutSupportDSL.swift */; };
 		871B71BD2249FD8900479E2A /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871B71912249FD8800479E2A /* ConstraintMakerRelatable.swift */; };
 		877821A4226F2ED400CC48E9 /* StoreTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877821A3226F2ED400CC48E9 /* StoreTool.swift */; };
+		877821B422704FDF00CC48E9 /* ListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877821B322704FDF00CC48E9 /* ListHeaderView.swift */; };
+		87954A382275DD95008A8EE3 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87954A372275DD95008A8EE3 /* DetailCell.swift */; };
 		87C3614E225F27C9000570AF /* 嚒嚒爱情相随.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */; };
 		87C36159225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */; };
 		87C3615D225F31F9000570AF /* CycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C3615C225F31F9000570AF /* CycleScrollView.swift */; };
@@ -137,6 +139,8 @@
 		871B71912249FD8800479E2A /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
 		871B71922249FD8800479E2A /* SnapKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SnapKit.xcodeproj; sourceTree = "<group>"; };
 		877821A3226F2ED400CC48E9 /* StoreTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTool.swift; sourceTree = "<group>"; };
+		877821B322704FDF00CC48E9 /* ListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeaderView.swift; sourceTree = "<group>"; };
+		87954A372275DD95008A8EE3 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "嚒嚒爱情相随.ttf"; sourceTree = "<group>"; };
 		87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PangMenZhengDaoCuShuTi-2.ttf"; sourceTree = "<group>"; };
 		87C3615C225F31F9000570AF /* CycleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleScrollView.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 				87C3615C225F31F9000570AF /* CycleScrollView.swift */,
 				30FDC4172246696C00DC8A31 /* ConfigView.swift */,
 				30FDC419224669B300DC8A31 /* Config.swift */,
+				87954A342275DD2C008A8EE3 /* View */,
 				877821B022704EDC00CC48E9 /* Tool */,
 				8719441322687DCE0083AF12 /* MyGame-bridging-Header.h */,
 				87F874BD226473D500ED9ED7 /* Localizable.strings */,
@@ -297,6 +302,15 @@
 				87194404226856130083AF12 /* AdmobTool.swift */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		87954A342275DD2C008A8EE3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				877821B322704FDF00CC48E9 /* ListHeaderView.swift */,
+				87954A372275DD95008A8EE3 /* DetailCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		87C3615B225F2E16000570AF /* FontSourse */ = {
@@ -499,6 +513,8 @@
 				871B719E2249FD8900479E2A /* ConstraintMakerPriortizable.swift in Sources */,
 				871B71A62249FD8900479E2A /* ConstraintPriority.swift in Sources */,
 				871B71A32249FD8900479E2A /* ConstraintMakerFinalizable.swift in Sources */,
+				877821B422704FDF00CC48E9 /* ListHeaderView.swift in Sources */,
+				87954A382275DD95008A8EE3 /* DetailCell.swift in Sources */,
 				871B71B22249FD8900479E2A /* ConstraintRelation.swift in Sources */,
 				871B719B2249FD8900479E2A /* ConstraintMultiplierTarget.swift in Sources */,
 				87023BFA2240C98C004700A9 /* AppDelegate.swift in Sources */,

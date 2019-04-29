@@ -11,15 +11,19 @@ import UIKit
 
 let cycle = "isCycle"
 let flicker = "isFlicker"
+let direction = "isRight"
+
 typealias swiftBlock = () ->Void
+typealias defaultValueBlock = () ->Void
+
 class Config {
     
     var label: UILabel!
     
     var speed: CGFloat = 1{
         didSet{
-            if callBack != nil {
-                callBack!()
+            if valueBlock != nil {
+                valueBlock!()
             }
         }
     }
@@ -27,8 +31,8 @@ class Config {
     var textColor: UIColor = .white{
         didSet{
             label.textColor = textColor
-            if callBack != nil {
-                callBack!()
+            if valueBlock != nil {
+                valueBlock!()
             }
         }
     }
@@ -52,6 +56,7 @@ class Config {
     }
     
     var callBack: swiftBlock?
+    var valueBlock: defaultValueBlock?
     
     var isCycle: Bool = UserDefaults.standard.bool(forKey: cycle){
         didSet{
@@ -68,7 +73,23 @@ class Config {
             }
         }
     }
-
+    
+    var bgColor: UIColor = .black{
+        didSet{
+            if valueBlock != nil {
+                valueBlock!()
+            }
+        }
+    }
+    
+    var isDirection:Bool = true{
+        didSet{
+            if valueBlock != nil {
+                valueBlock!()
+            }
+        }
+    }
+    
  
     
     static let shareInstance = Config()
@@ -78,8 +99,9 @@ class Config {
         UserDefaults.standard.set(value, forKey: key)
     }
     
-    func startAnimation(block: @escaping swiftBlock)  {
+    func startAnimation(block: @escaping swiftBlock, defaultBlock: @escaping defaultValueBlock)  {
         callBack = block
+        valueBlock = defaultBlock
     }
     
 }

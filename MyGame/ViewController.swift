@@ -76,20 +76,26 @@ class ViewController: UIViewController {
        let cycleView = CycleScrollView.init(frame: CGRect(x: 0, y: 0, width: view.frame.size.height, height: view.frame.size.width))
         return cycleView
     }()
+    
+    let setView = ListHeaderView.init(frame: CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight))
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         view.addSubview(contentView)
-        contentView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+//        contentView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
         contentView.addSubview(cycleView)
         view.addSubview(bottomView)
         label.sizeToFit()
         self.addNotification()
 
         Config.shareInstance.label = label
-        Config.shareInstance.startAnimation {
+        Config.shareInstance.startAnimation(block: {
             self.startAnimation()
+
+        }) {
+            self.settingLabelValue()
         }
         configView.dismiss {
             self.isHiddenBottomView()
@@ -124,13 +130,20 @@ class ViewController: UIViewController {
         self.cycleView.fire()
     }
     
+    fileprivate func settingLabelValue(){
+        self.view.backgroundColor = Config.shareInstance.bgColor
+        self.cycleView.changeLableValue()
+        if Config.shareInstance.isDirection {
+            self.contentView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+        }else{
+            self.contentView.transform = CGAffineTransform(rotationAngle: CGFloat.pi +  (CGFloat.pi / 2))
+        }
+    }
+    
     @objc func showConfigView(){
         view.endEditing(true)
         isHiddenBottomView()
-        configView.showView(showController: self) {
-            self.isHiddenBottomView()
-        }
-        AdmobTool.sharedManager.showInterstitial(showController: self)
+        setView.showView()
     }
     
     // MARK: - 是否隐藏底部视图
@@ -190,6 +203,8 @@ extension ViewController{
     }
    
     @objc func keyBoardWillShow(_ notification:Notification) {
+        if setView.isShow  { return }
+        
         let info : NSDictionary = notification.userInfo! as NSDictionary
         let keyboardSize = info["UIKeyboardFrameBeginUserInfoKey"] as! CGRect
         let time = info["UIKeyboardAnimationDurationUserInfoKey"]

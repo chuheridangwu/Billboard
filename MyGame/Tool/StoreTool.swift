@@ -19,7 +19,7 @@ enum InpurcaseError: Error {
 typealias Order = (productIdentifiers: String, userName: String)
 
 class StoreTool: NSObject {
-    static let startInitialize = StoreTool()
+    static let makeInitialize = StoreTool()
     
     /// 掉单/未完成的订单回调 (凭证, 交易, 交易队列)
     var unFinishedTransaction: ((String, SKPaymentTransaction, SKPaymentQueue) ->())?

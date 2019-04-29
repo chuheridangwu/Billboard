@@ -9,10 +9,16 @@
 import UIKit
 
 class CycleScrollView: UIScrollView {
+    /// 速度
     var seep: CGFloat = 1.0
+    
+    /// 起始位置
     var startX: CGFloat = 0.0
+    
+    /// label之间的间距
     var margin = 10.0
     
+    /// label的集合
     var views: [UIView] = []{
         didSet{
             if views.count == 0 {
@@ -95,7 +101,7 @@ class CycleScrollView: UIScrollView {
         self.contentOffset = CGPoint(x: self.contentOffset.x + 1.0 * seep, y: 0)
     }
     
-    func refreshUI()  {
+    private  func refreshUI()  {
         var maxWidth = startX
         for index in 0..<views.count {
             let view = views[index]
@@ -144,6 +150,17 @@ class CycleScrollView: UIScrollView {
         }
     }
     
+    // MARK: -- 改变不需要重新刷新的值，比如颜色 速度
+    func changeLableValue()  {
+        for label in views {
+            if let l = label as? UILabel {
+               l.textColor = Config.shareInstance.textColor
+            }
+        }
+        seep = Config.shareInstance.speed
+    }
+    
+    // MARK: -- label添加闪烁动画
     let identfian = "labelAnimation"
     private func addOpacityAnimation(view: UIView){
         let animation = CABasicAnimation.init(keyPath: "opacity")
