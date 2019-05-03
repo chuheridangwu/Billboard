@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         textView.delegate = self
         textView.borderStyle = .roundedRect
         textView.textAlignment = .center
-        textView.placeholder = "请在这里输入要滚动的字"
+        textView.placeholder = "text1".localized
         textView.layer.cornerRadius = 22
         textView.layer.masksToBounds = true
         subtitle = textView.placeholder

@@ -5,3 +5,21 @@
   Created by MLive on 2019/4/15.
   Copyright © 2019 Game. All rights reserved.
 */
+
+"text1" = "請輸入要滾動的文字";
+"text2" = "速度";
+"text3" = "字體樣式";
+"text4" = "字體大小";
+"text5" = "字體顏色";
+"text6" = "背景顏色";
+"text7" = "滾動方向";
+"text8" = "閃爍";
+"text9" = "循環d滾動";
+"text10" = "支持作者";
+"text11" = "從右到左";
+"text12" = "從左到右";
+"text13" = "開啟字體閃爍";
+"text14" = "關閉字體閃爍";
+"text15" = "開啟循環滾動";
+"text16" = "關閉循環滾動";
+"text17" = "做的不錯，獎勵作者\n RMB￥1";

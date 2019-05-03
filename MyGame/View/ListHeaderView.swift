@@ -26,15 +26,15 @@ class ListHeaderView: UIView {
     
    fileprivate let itemView = ListItemView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     
-   fileprivate let listAry: [ItmeType] = [ItmeType.seep([0.5,1,2,3,5],"速度"),
-                               ItmeType.font(["Helvetica-Bold","STHeitiTC-Medium","PangMenZhengDao-Cu","HYXingYuTiJ"],"字体样式"),
-                               ItmeType.fontSize([80,120,180,220],"字体大小"),
-                               ItmeType.fontColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"字体颜色"),
-                               ItmeType.bgColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"背景颜色"),
-                               ItmeType.direction(["从右到左","从左到右"],"滚动方向"),
-                               ItmeType.filker(["开启字体闪烁","关闭字体闪烁"],"闪烁"),
-                               ItmeType.isRepeat(["开启循环滚动","关闭循环滚动"],"循环滚动"),
-                               ItmeType.anthor(["做的不错,奖励一下\n RMB ￥1"],"支持作者")]
+   fileprivate let listAry: [ItmeType] = [ItmeType.seep([0.5,1,2,3,5],"text2".localized),
+                               ItmeType.font(["Helvetica-Bold","STHeitiTC-Medium","PangMenZhengDao-Cu","HYXingYuTiJ"],"text3".localized),
+                               ItmeType.fontSize([80,120,180,220],"text4".localized),
+                               ItmeType.fontColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text5".localized),
+                               ItmeType.bgColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text6".localized),
+                               ItmeType.direction(["text11".localized,"text12".localized],"text7".localized),
+                               ItmeType.filker(["text13".localized,"text14".localized],"text8".localized),
+                               ItmeType.isRepeat(["text15".localized,"text16".localized],"text9".localized),
+                               ItmeType.anthor(["text17".localized],"text10".localized)]
     
     fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView.init(frame: CGRect(x: -100, y: 0, width: 120, height: listAry.count * 44), style: UITableView.Style.plain)

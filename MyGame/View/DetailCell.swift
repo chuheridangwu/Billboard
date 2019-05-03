@@ -35,7 +35,7 @@ class FontTypeCell: BaseCell {
         let label = UILabel.init(frame: CGRect.zero)
         label.textAlignment = .center
         label.textColor = .black
-        label.text = "字体样式"
+        label.text = "text3".localized
         return label
     }()
     
@@ -70,7 +70,7 @@ class FontSizeCell: BaseCell {
     
     var fontSize: CGFloat = 0{
         didSet{
-            label.text = "字体大小" + " - " + "\(fontSize)"
+            label.text = "text4".localized + " - " + "\(fontSize)"
             label.font = UIFont.init(name: Config.shareInstance.fontStyle, size: 22)
         }
     }
@@ -101,7 +101,7 @@ class ColorCell: BaseCell {
     
     var bgColor: Int = 0{
         didSet{
-            label.text = "背景颜色"
+            label.text = "text6".localized
             label.textColor = .white
             label.backgroundColor = fontColor
         }
@@ -110,7 +110,7 @@ class ColorCell: BaseCell {
     
     var fontColor: UIColor = .black{
         didSet{
-            label.text = "字体颜色"
+            label.text = "text5".localized
             label.textColor = fontColor
             label.backgroundColor = .white
             label.font = UIFont.init(name: Config.shareInstance.fontStyle, size: 22)
