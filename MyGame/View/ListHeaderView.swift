@@ -27,7 +27,7 @@ class ListHeaderView: UIView {
    fileprivate let itemView = ListItemView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     
    fileprivate let listAry: [ItmeType] = [ItmeType.seep([0.5,1,2,3,5],"text2".localized),
-                               ItmeType.font(["Helvetica-Bold","STHeitiTC-Medium","PangMenZhengDao-Cu","HYXingYuTiJ"],"text3".localized),
+                               ItmeType.font(["Helvetica-Bold","STHeitiTC-Medium","PangMenZhengDao-Cu","HYXingYuTiJ","ZoomlaWuanYue-A017"],"text3".localized),
                                ItmeType.fontSize([80,120,180,220,280,320],"text4".localized),
                                ItmeType.fontColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text5".localized),
                                ItmeType.bgColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text6".localized),

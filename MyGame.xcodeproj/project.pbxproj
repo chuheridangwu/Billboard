@@ -55,6 +55,7 @@
 		877821A4226F2ED400CC48E9 /* StoreTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877821A3226F2ED400CC48E9 /* StoreTool.swift */; };
 		877821B422704FDF00CC48E9 /* ListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877821B322704FDF00CC48E9 /* ListHeaderView.swift */; };
 		87954A382275DD95008A8EE3 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87954A372275DD95008A8EE3 /* DetailCell.swift */; };
+		879CDB0F229277C000E7830A /* ZhuLangChuangYiWanYueTi.otf in Resources */ = {isa = PBXBuildFile; fileRef = 879CDB0C229277C000E7830A /* ZhuLangChuangYiWanYueTi.otf */; };
 		87C3614E225F27C9000570AF /* 嚒嚒爱情相随.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */; };
 		87C36159225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */; };
 		87C3615D225F31F9000570AF /* CycleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C3615C225F31F9000570AF /* CycleScrollView.swift */; };
@@ -139,6 +140,7 @@
 		877821A3226F2ED400CC48E9 /* StoreTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTool.swift; sourceTree = "<group>"; };
 		877821B322704FDF00CC48E9 /* ListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListHeaderView.swift; sourceTree = "<group>"; };
 		87954A372275DD95008A8EE3 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
+		879CDB0C229277C000E7830A /* ZhuLangChuangYiWanYueTi.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ZhuLangChuangYiWanYueTi.otf; sourceTree = "<group>"; };
 		87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "嚒嚒爱情相随.ttf"; sourceTree = "<group>"; };
 		87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PangMenZhengDaoCuShuTi-2.ttf"; sourceTree = "<group>"; };
 		87C3615C225F31F9000570AF /* CycleScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleScrollView.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 		87C3615B225F2E16000570AF /* FontSourse */ = {
 			isa = PBXGroup;
 			children = (
+				879CDB0C229277C000E7830A /* ZhuLangChuangYiWanYueTi.otf */,
 				87C3614B225F27C9000570AF /* 嚒嚒爱情相随.ttf */,
 				87C36156225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf */,
 				87F874A622646EC000ED9ED7 /* HanYiXingYuTiJian.ttf */,
@@ -426,6 +429,7 @@
 				87023C042240C98D004700A9 /* LaunchScreen.storyboard in Resources */,
 				87023C012240C98D004700A9 /* Assets.xcassets in Resources */,
 				87023BFF2240C98C004700A9 /* Main.storyboard in Resources */,
+				879CDB0F229277C000E7830A /* ZhuLangChuangYiWanYueTi.otf in Resources */,
 				87F874BB226473D500ED9ED7 /* Localizable.strings in Resources */,
 				87F874B62264714400ED9ED7 /* HYSunWanMinCaoShuF.ttf in Resources */,
 				87C36159225F2DD7000570AF /* PangMenZhengDaoCuShuTi-2.ttf in Resources */,
