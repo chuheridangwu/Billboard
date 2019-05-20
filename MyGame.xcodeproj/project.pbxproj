@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30FDC4182246696C00DC8A31 /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FDC4172246696C00DC8A31 /* ConfigView.swift */; };
 		30FDC41A224669B300DC8A31 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FDC419224669B300DC8A31 /* Config.swift */; };
 		87023BFA2240C98C004700A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87023BF92240C98C004700A9 /* AppDelegate.swift */; };
 		87023BFC2240C98C004700A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87023BFB2240C98C004700A9 /* ViewController.swift */; };
@@ -84,7 +83,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		30FDC4172246696C00DC8A31 /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
 		30FDC419224669B300DC8A31 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		33D2A7124E5202130DE9F7FD /* Pods_MyGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		701A75718FD286E92ACB7FED /* Pods-MyGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyGame.debug.xcconfig"; path = "Target Support Files/Pods-MyGame/Pods-MyGame.debug.xcconfig"; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 				87023BF92240C98C004700A9 /* AppDelegate.swift */,
 				87023BFB2240C98C004700A9 /* ViewController.swift */,
 				87C3615C225F31F9000570AF /* CycleScrollView.swift */,
-				30FDC4172246696C00DC8A31 /* ConfigView.swift */,
 				30FDC419224669B300DC8A31 /* Config.swift */,
 				87954A342275DD2C008A8EE3 /* View */,
 				877821B022704EDC00CC48E9 /* Tool */,
@@ -500,7 +497,6 @@
 				8719441222687C5D0083AF12 /* XGPushTool.swift in Sources */,
 				871B71B12249FD8900479E2A /* ConstraintMaker.swift in Sources */,
 				871B71AD2249FD8900479E2A /* Typealiases.swift in Sources */,
-				30FDC4182246696C00DC8A31 /* ConfigView.swift in Sources */,
 				87023BFC2240C98C004700A9 /* ViewController.swift in Sources */,
 				30FDC41A224669B300DC8A31 /* Config.swift in Sources */,
 				871B719F2249FD8900479E2A /* ConstraintAttributes.swift in Sources */,

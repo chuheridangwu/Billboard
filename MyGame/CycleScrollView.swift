@@ -166,7 +166,7 @@ class CycleScrollView: UIScrollView {
         let animation = CABasicAnimation.init(keyPath: "opacity")
         animation.fromValue = 1.0
         animation.toValue = 0.4
-        animation.duration = 0.1
+        animation.duration = 0.12
         animation.repeatCount = MAXFLOAT
         animation.isRemovedOnCompletion = false
         animation.fillMode = .forwards

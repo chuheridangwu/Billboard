@@ -20,7 +20,7 @@ class Config {
     
     var label: UILabel!
     
-    var speed: CGFloat = 1{
+    var speed: CGFloat = 2 {
         didSet{
             if valueBlock != nil {
                 valueBlock!()
@@ -28,7 +28,7 @@ class Config {
         }
     }
     
-    var textColor: UIColor = .white{
+    var textColor: UIColor = .yellow{
         didSet{
             label.textColor = textColor
             if valueBlock != nil {
@@ -37,7 +37,7 @@ class Config {
         }
     }
     
-    var fontSize: CGFloat =  16{
+    var fontSize: CGFloat =  180{
         didSet{
             label.font = UIFont.init(name: fontStyle, size: fontSize)
             if callBack != nil {
@@ -46,7 +46,7 @@ class Config {
         }
     }
     
-    var fontStyle: String = ""{
+    var fontStyle: String = "STHeitiTC-Medium"{
         didSet{
             label.font = UIFont.init(name: fontStyle, size: fontSize)
             if callBack != nil {

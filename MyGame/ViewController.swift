@@ -21,8 +21,8 @@ class ViewController: UIViewController {
     
     lazy var label :UILabel = {
         let label = UILabel.init(frame: CGRect(x: 0, y:0, width: view.frame.size.height, height: view.frame.size.width))
-        label.font = UIFont.init(name: "STHeitiTC-Medium", size: 120)
-        label.textColor = .white
+        label.font = UIFont.init(name: "STHeitiTC-Medium", size: 180)
+        label.textColor = .yellow
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -42,6 +42,7 @@ class ViewController: UIViewController {
         textView.borderStyle = .roundedRect
         textView.textAlignment = .center
         textView.placeholder = "text1".localized
+        textView.text = "text1".localized
         textView.layer.cornerRadius = 22
         textView.layer.masksToBounds = true
         subtitle = textView.placeholder
@@ -66,11 +67,6 @@ class ViewController: UIViewController {
             label.text = subtitle
         }
     }
-
-    lazy var configView: ConfigView = {
-        let view = ConfigView.init(frame: self.view.bounds)
-        return view
-    }()
     
     lazy var cycleView: CycleScrollView = {
        let cycleView = CycleScrollView.init(frame: CGRect(x: 0, y: 0, width: view.frame.size.height, height: view.frame.size.width))
@@ -84,7 +80,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         view.addSubview(contentView)
-//        contentView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+        contentView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
         contentView.addSubview(cycleView)
         view.addSubview(bottomView)
         label.sizeToFit()
@@ -97,13 +93,10 @@ class ViewController: UIViewController {
         }) {
             self.settingLabelValue()
         }
-        configView.dismiss {
-            self.isHiddenBottomView()
-        }
-        
-        cycleView.views = [Config.shareInstance.label]
-        cycleView.fire()
+        self.startAnimation()
         timer.fireDate = Date.init(timeIntervalSinceNow: animationTime)
+        view.addGestureRecognizer(UIPanGestureRecognizer.init(target: self, action: #selector(switchPanView)))
+        view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(touchTapView)))
     }
     
     deinit {
@@ -115,10 +108,9 @@ class ViewController: UIViewController {
         return true
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        isHiddenBottomView()
-        view.endEditing(true)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//
+//    }
 
   fileprivate  func startAnimation()  {
         self.label.numberOfLines = 1
@@ -148,27 +140,24 @@ class ViewController: UIViewController {
     
     // MARK: - 是否隐藏底部视图
     private func isHiddenBottomView() {
-        if bottomView.frame.origin.y > view.viewHeight() {
-            timer.fireDate = Date.init(timeIntervalSinceNow: animationTime)
-            UIView.animate(withDuration: 0.35) {
-                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 64 - tabbarHeight, width: self.view.viewWidth(), height: 44)
+        if bottomView.frame.origin.y < view.viewHeight() && bottomView.frame.origin.y >= self.view.viewHeight() - 64 - tabbarHeight  {
+            timer.fireDate = Date.distantFuture
+            UIView.animate(withDuration: 0.4) {
+                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 64 - tabbarHeight + 120, width: self.view.viewWidth(), height: 44)
             }
         }else{
-            closeBottomView()
+            timer.fireDate = Date.init(timeIntervalSinceNow: animationTime)
+            UIView.animate(withDuration: 0.4) {
+                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 64 - tabbarHeight , width: self.view.viewWidth(), height: 44)
+            }
         }
     }
     
     // MARK: - 隐藏底部视图
     @objc func closeBottomView() {
         timer.fireDate = Date.distantFuture
-        if bottomView.frame.origin.y < view.viewHeight() && bottomView.frame.origin.y >= self.view.viewHeight() - 64 - tabbarHeight  {
-            UIView.animate(withDuration: 0.4) {
-                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 64 - tabbarHeight + 120, width: self.view.viewWidth(), height: 44)
-            }
-        }else{
-            UIView.animate(withDuration: 0.4) {
-                self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 64 - tabbarHeight , width: self.view.viewWidth(), height: 44)
-            }
+        UIView.animate(withDuration: 0.4) {
+            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - 64 - tabbarHeight + 120, width: self.view.viewWidth(), height: 44)
         }
     }
     
@@ -206,12 +195,12 @@ extension ViewController{
         if setView.isShow  { return }
         
         let info : NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardSize = info["UIKeyboardFrameBeginUserInfoKey"] as! CGRect
+        let keyboardSize = info["UIKeyboardFrameEndUserInfoKey"] as! CGRect
         let time = info["UIKeyboardAnimationDurationUserInfoKey"]
         timer.fireDate = Date.distantFuture
         
         UIView.animate(withDuration: time as! TimeInterval) {
-            self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() - keyboardSize.size.height - 64 -  tabbarHeight, width: self.view.viewWidth(), height: 44)
+            self.bottomView.frame = CGRect(x: 0, y: keyboardSize.origin.y - 44 - 20, width: self.view.viewWidth(), height: 44)
         }
     }
     
@@ -222,6 +211,49 @@ extension ViewController{
         UIView.animate(withDuration: time as! TimeInterval) {
             self.bottomView.frame = CGRect(x: 0, y: self.view.viewHeight() -  64 -  tabbarHeight , width: self.view.viewWidth(), height: 44)
         }
+    }
+}
+
+// MARK: - 手势
+extension ViewController{
+    @objc private func switchPanView(pan: UIPanGestureRecognizer){
+        if pan.state == .ended {
+            self.commitTranslation(translation: pan.translation(in: self.view))
+        }
+    }
+    
+    private func commitTranslation(translation: CGPoint){
+        let absX = abs(translation.x)
+        let absY = abs(translation.y)
+        guard max(absX,absY) > 10 else { // 设置滑动有效距离
+            return;
+        }
+        if (absX > absY ) { //左右滑动
+            
+            if (translation.x<0) {
+                //向左滑动
+            }else{
+                //向右滑动
+                setView.showView()
+                closeBottomView()
+            }
+            
+        } else if (absY > absX) { // 上下滑动
+            if (translation.y<0) {
+                //向上滑动
+            }else{
+                //向下滑动
+            }
+        }
+    }
+    
+    @objc private func touchTapView(){
+        if textView.text != subtitle{
+            subtitle = textView.text?.count ?? 0 > 0 ? textView.text : textView.placeholder
+            startAnimation()
+        }
+        isHiddenBottomView()
+        view.endEditing(true)
     }
 }
 
