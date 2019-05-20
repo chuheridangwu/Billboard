@@ -21,8 +21,8 @@ class ViewController: UIViewController {
     
     lazy var label :UILabel = {
         let label = UILabel.init(frame: CGRect(x: 0, y:0, width: view.frame.size.height, height: view.frame.size.width))
-        label.font = UIFont.init(name: "STHeitiTC-Medium", size: 180)
-        label.textColor = .yellow
+        label.font = UIFont.init(name: Config.shareInstance.fontStyle, size: Config.shareInstance.fontSize)
+        label.textColor = Config.shareInstance.textColor
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -99,6 +99,18 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(touchTapView)))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // 保持常亮
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // 保持常亮
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -107,10 +119,6 @@ class ViewController: UIViewController {
     override var prefersStatusBarHidden: Bool{
         return true
     }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//
-//    }
 
   fileprivate  func startAnimation()  {
         self.label.numberOfLines = 1

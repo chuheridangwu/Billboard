@@ -37,7 +37,7 @@ class Config {
         }
     }
     
-    var fontSize: CGFloat =  180{
+    var fontSize: CGFloat =  220{
         didSet{
             label.font = UIFont.init(name: fontStyle, size: fontSize)
             if callBack != nil {

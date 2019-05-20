@@ -310,7 +310,7 @@ extension ListItemView: UITableViewDelegate, UITableViewDataSource{
             if indexPath.row == 0{
                 height = 65
             }else{
-                height = 160
+                height = 155
             }
         default:
             height = 65
