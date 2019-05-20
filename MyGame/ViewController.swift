@@ -248,7 +248,7 @@ extension ViewController{
     }
     
     @objc private func touchTapView(){
-        if textView.text != subtitle{
+        if textView.text != subtitle && textView.text?.count ?? 0 > 0{
             subtitle = textView.text?.count ?? 0 > 0 ? textView.text : textView.placeholder
             startAnimation()
         }

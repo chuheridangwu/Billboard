@@ -28,13 +28,13 @@ class ListHeaderView: UIView {
     
    fileprivate let listAry: [ItmeType] = [ItmeType.seep([0.5,1,2,3,5],"text2".localized),
                                ItmeType.font(["Helvetica-Bold","STHeitiTC-Medium","PangMenZhengDao-Cu","HYXingYuTiJ"],"text3".localized),
-                               ItmeType.fontSize([80,120,180,220],"text4".localized),
+                               ItmeType.fontSize([80,120,180,220,280,320],"text4".localized),
                                ItmeType.fontColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text5".localized),
                                ItmeType.bgColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text6".localized),
                                ItmeType.direction(["text11".localized,"text12".localized],"text7".localized),
                                ItmeType.filker(["text13".localized,"text14".localized],"text8".localized),
                                ItmeType.isRepeat(["text15".localized,"text16".localized],"text9".localized),
-                               ItmeType.anthor(["text17".localized],"text10".localized)]
+                               ItmeType.anthor(["text17".localized,"text18".localized],"text10".localized)]
     
     fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView.init(frame: CGRect(x: -100, y: 0, width: 120, height: listAry.count * 44), style: UITableView.Style.plain)
@@ -217,7 +217,6 @@ class ListItemView: UIView {
         super.init(frame: frame)
         layer.masksToBounds = true
         layer.cornerRadius = 5
-//        backgroundColor = .clear
 
         addSubview(tableView)
     }
@@ -307,6 +306,12 @@ extension ListItemView: UITableViewDelegate, UITableViewDataSource{
             height = 44
         case .filker(_,_)?:
             height = 44
+        case .anthor(_,_)?:
+            if indexPath.row == 0{
+                height = 65
+            }else{
+                height = 160
+            }
         default:
             height = 65
         }
@@ -338,15 +343,18 @@ extension ListItemView: UITableViewDelegate, UITableViewDataSource{
             let isFlicker = indexPath.row == 0 ? true : false
             Config.shareInstance.isFlicker = isFlicker
             Config.shareInstance.saveValue(value: isFlicker, key: flicker)
-        default:
-            let productIdentifiers: Set<String> = ["com.dym.1"]
-            StoreTool.makeInitialize.start(productIdentifiers: productIdentifiers, successBlock: { () -> Order in
-                return (productIdentifiers: productIdentifiers.first!, userName: "appStore")
-            }, receiptBlock: { (receipt, transaction, queue) in
-                
-            }) { (error) in
-                
+        case .anthor(_,_)?:
+            if indexPath.row == 0{
+                let productIdentifiers: Set<String> = ["com.dym.1"]
+                StoreTool.makeInitialize.start(productIdentifiers: productIdentifiers, successBlock: { () -> Order in
+                    return (productIdentifiers: productIdentifiers.first!, userName: "appStore")
+                }, receiptBlock: { (receipt, transaction, queue) in
+                    
+                }) { (error) in
+                    
+                }
             }
+        default:
             break
         }
     }
