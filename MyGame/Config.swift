@@ -12,6 +12,9 @@ import UIKit
 let cycle = "isCycle"
 let flicker = "isFlicker"
 let direction = "isRight"
+let shadow = "isShadow"
+let italic = "isItalic"
+let fluore = "isFluore"
 
 typealias swiftBlock = () ->Void
 typealias defaultValueBlock = () ->Void
@@ -90,9 +93,35 @@ class Config {
         }
     }
     
+    /// 阴影
+    var isShadow: Bool = UserDefaults.standard.bool(forKey: shadow){
+        didSet{
+            if callBack != nil {
+                callBack!()
+            }
+        }
+    }
+    
+    /// 斜体
+    var isItalic: Bool = UserDefaults.standard.bool(forKey: italic){
+        didSet{
+            if callBack != nil {
+                callBack!()
+            }
+        }
+    }
+    
+    /// 荧光
+    var isFluore: Bool = UserDefaults.standard.bool(forKey: fluore){
+        didSet{
+            if callBack != nil {
+                callBack!()
+            }
+        }
+    }
  
     
-    static let shareInstance = Config()
+    static let makeConfig = Config()
     private init(){}
     
     func saveValue(value:Bool, key: String){

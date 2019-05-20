@@ -17,6 +17,7 @@ enum ItmeType {
     case direction([String],String)
     case isRepeat([String],String)
     case filker([String],String)
+    case attribute([String],String)
     case anthor([String],String)
 }
 
@@ -26,15 +27,16 @@ class ListHeaderView: UIView {
     
    fileprivate let itemView = ListItemView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     
-   fileprivate let listAry: [ItmeType] = [ItmeType.seep([0.5,1,2,3,5],"text2".localized),
-                               ItmeType.font(["Helvetica-Bold","STHeitiTC-Medium","PangMenZhengDao-Cu","HYXingYuTiJ","ZoomlaWuanYue-A017"],"text3".localized),
-                               ItmeType.fontSize([80,120,180,220,280,320],"text4".localized),
-                               ItmeType.fontColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text5".localized),
-                               ItmeType.bgColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text6".localized),
-                               ItmeType.direction(["text11".localized,"text12".localized],"text7".localized),
-                               ItmeType.filker(["text13".localized,"text14".localized],"text8".localized),
-                               ItmeType.isRepeat(["text15".localized,"text16".localized],"text9".localized),
-                               ItmeType.anthor(["text17".localized,"text18".localized],"text10".localized)]
+    fileprivate let listAry: [ItmeType] = [ItmeType.seep([0.5,1,2,3,5],"text2".localized),
+                                           ItmeType.font(["Helvetica-Bold","STHeitiTC-Medium","PangMenZhengDao-Cu","HYXingYuTiJ","ZoomlaWuanYue-A017"],"text3".localized),
+                                           ItmeType.fontSize([80,120,180,220,280,320],"text4".localized),
+                                           ItmeType.fontColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text5".localized),
+                                           ItmeType.bgColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text6".localized),
+                                           ItmeType.direction(["text11".localized,"text12".localized],"text7".localized),
+                                           ItmeType.filker(["text13".localized,"text14".localized],"text8".localized),
+                                           ItmeType.isRepeat(["text15".localized,"text16".localized],"text9".localized),
+                                           ItmeType.attribute(["text20".localized,"text21".localized,"text22".localized],"text19".localized),
+                                           ItmeType.anthor(["text17".localized,"text18".localized],"text10".localized)]
     
     fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView.init(frame: CGRect(x: -100, y: 0, width: 120, height: listAry.count * 44), style: UITableView.Style.plain)
@@ -129,6 +131,8 @@ extension ListHeaderView: UITableViewDelegate, UITableViewDataSource{
             cell?.textLabel?.text = str
         case .filker(_,let str):
             cell?.textLabel?.text = str
+        case .attribute(_, let str):
+             cell?.textLabel?.text = str
         case .anthor(_, let str):
             cell?.textLabel?.text = str
         }
@@ -165,7 +169,8 @@ extension ListHeaderView: UITableViewDelegate, UITableViewDataSource{
 
         case .filker(let ary, _):
             showItemView(cell: cell, width: 150, ary: ary as [AnyObject] , type: type)
-
+        case .attribute(let ary,_):
+            showItemView(cell: cell, width: 180, ary: ary as [AnyObject] , type: type)
         case .anthor(let ary, _):
             showItemView(cell: cell, width: 180, ary: ary as [AnyObject] , type: type, height: 65)
 
@@ -188,6 +193,7 @@ extension ListHeaderView: UITableViewDelegate, UITableViewDataSource{
 }
 
 
+// MARK: -- Item
 class ListItemView: UIView {
     
     var itemAry: [AnyObject] = []
@@ -208,7 +214,8 @@ class ListItemView: UIView {
         tableView.register(FontTypeCell.self, forCellReuseIdentifier: FontTypeCell.identifier)
         tableView.register(FontSizeCell.self, forCellReuseIdentifier: FontSizeCell.identifier)
         tableView.register(ColorCell.self, forCellReuseIdentifier: ColorCell.identifier)
-
+        tableView.register(SwitchCell.self, forCellReuseIdentifier: SwitchCell.identifier)
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "index")
         return tableView
     }()
@@ -229,7 +236,6 @@ class ListItemView: UIView {
         type = switchType
         itemAry = listAry
         tableView.frame = self.bounds
-//        tableView.backgroundColor = .clear
         tableView.reloadData()
     }
     
@@ -279,6 +285,11 @@ extension ListItemView: UITableViewDelegate, UITableViewDataSource{
             indexCell.textLabel?.text = anyobj as? String
         case .filker(_,_)?:
             indexCell.textLabel?.text = anyobj as? String
+        case .attribute(_,_)?:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: SwitchCell.identifier, for: indexPath) as? SwitchCell {
+                cell.labelText = anyobj as? String
+                return cell
+            }
         case .none:
             break
         case .some(.anthor(_, _)):
@@ -306,6 +317,8 @@ extension ListItemView: UITableViewDelegate, UITableViewDataSource{
             height = 44
         case .filker(_,_)?:
             height = 44
+        case .attribute(_,_)?:
+            height = 44
         case .anthor(_,_)?:
             if indexPath.row == 0{
                 height = 65
@@ -322,27 +335,27 @@ extension ListItemView: UITableViewDelegate, UITableViewDataSource{
         let anyobj = itemAry[indexPath.row]
         switch type {
         case .seep(_, _)?:
-            Config.shareInstance.speed = anyobj as! CGFloat
+            Config.makeConfig.speed = anyobj as! CGFloat
         case .font(_,_)?:
-            Config.shareInstance.fontStyle = anyobj as! String
+            Config.makeConfig.fontStyle = anyobj as! String
         case .fontSize(_,_)?:
-            Config.shareInstance.fontSize = anyobj as! CGFloat
+            Config.makeConfig.fontSize = anyobj as! CGFloat
         case .fontColor(_,_)?:
-            Config.shareInstance.textColor = anyobj as! UIColor
+            Config.makeConfig.textColor = anyobj as! UIColor
         case .bgColor(_,_)?:
-            Config.shareInstance.bgColor = anyobj as! UIColor
+            Config.makeConfig.bgColor = anyobj as! UIColor
         case .direction(_,_)?:
             let isDirection = indexPath.row == 0 ? true : false
-            Config.shareInstance.isDirection = isDirection
-            Config.shareInstance.saveValue(value: isDirection, key: direction)
+            Config.makeConfig.isDirection = isDirection
+            Config.makeConfig.saveValue(value: isDirection, key: direction)
         case .isRepeat(_,_)?:
             let isCycle = indexPath.row == 0 ? true : false
-            Config.shareInstance.isCycle = isCycle
-            Config.shareInstance.saveValue(value: isCycle, key: cycle)
+            Config.makeConfig.isCycle = isCycle
+            Config.makeConfig.saveValue(value: isCycle, key: cycle)
         case .filker(_,_)?:
             let isFlicker = indexPath.row == 0 ? true : false
-            Config.shareInstance.isFlicker = isFlicker
-            Config.shareInstance.saveValue(value: isFlicker, key: flicker)
+            Config.makeConfig.isFlicker = isFlicker
+            Config.makeConfig.saveValue(value: isFlicker, key: flicker)
         case .anthor(_,_)?:
             if indexPath.row == 0{
                 let productIdentifiers: Set<String> = ["com.dym.1"]

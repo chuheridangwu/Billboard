@@ -21,8 +21,8 @@ class ViewController: UIViewController {
     
     lazy var label :UILabel = {
         let label = UILabel.init(frame: CGRect(x: 0, y:0, width: view.frame.size.height, height: view.frame.size.width))
-        label.font = UIFont.init(name: Config.shareInstance.fontStyle, size: Config.shareInstance.fontSize)
-        label.textColor = Config.shareInstance.textColor
+        label.font = UIFont.init(name: Config.makeConfig.fontStyle, size: Config.makeConfig.fontSize)
+        label.textColor = Config.makeConfig.textColor
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -86,8 +86,8 @@ class ViewController: UIViewController {
         label.sizeToFit()
         self.addNotification()
 
-        Config.shareInstance.label = label
-        Config.shareInstance.startAnimation(block: {
+        Config.makeConfig.label = label
+        Config.makeConfig.startAnimation(block: {
             self.startAnimation()
 
         }) {
@@ -124,16 +124,16 @@ class ViewController: UIViewController {
         self.label.numberOfLines = 1
         self.label.sizeToFit()
         self.cycleView.stopCycle()
-        self.cycleView.isCycle = Config.shareInstance.isCycle
-        self.cycleView.seep = Config.shareInstance.speed
-        self.cycleView.views = [Config.shareInstance.label]
+        self.cycleView.isCycle = Config.makeConfig.isCycle
+        self.cycleView.seep = Config.makeConfig.speed
+        self.cycleView.views = [Config.makeConfig.label]
         self.cycleView.fire()
     }
     
     fileprivate func settingLabelValue(){
-        self.view.backgroundColor = Config.shareInstance.bgColor
+        self.view.backgroundColor = Config.makeConfig.bgColor
         self.cycleView.changeLableValue()
-        if Config.shareInstance.isDirection {
+        if Config.makeConfig.isDirection {
             self.contentView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
         }else{
             self.contentView.transform = CGAffineTransform(rotationAngle: CGFloat.pi +  (CGFloat.pi / 2))

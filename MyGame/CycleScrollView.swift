@@ -24,19 +24,47 @@ class CycleScrollView: UIScrollView {
             if views.count == 0 {
                 return
             }
-            if isCycle == false || Config.shareInstance.speed == 0 {
-                let label = views.first as! UILabel
+            let label = views.first as! UILabel
+            
+            var attribute: NSAttributedString?
+            if Config.makeConfig.isFluore {
+                let shadow = NSShadow.init()
+                shadow.shadowColor = Config.makeConfig.textColor
+                shadow.shadowOffset = CGSize(width: 1, height: 3)
+                shadow.shadowBlurRadius = 25
+    
+                if Config.makeConfig.isItalic{
+                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
+                }else{
+                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
+                }
+            }else{
+                let shadow = NSShadow.init()
+                shadow.shadowOffset = CGSize(width: 0, height: 0)
+                if Config.makeConfig.isShadow {
+                    shadow.shadowColor = UIColor.white
+                    shadow.shadowOffset = CGSize(width: 5, height: 5)
+                }
+                if Config.makeConfig.isItalic{
+                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
+                }else{
+                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
+                }
+            }
+            label.attributedText = attribute
+
+            if isCycle == false || Config.makeConfig.speed == 0 {
                 label.numberOfLines = 0
                 label.frame = self.bounds
                 self.addSubview(label)
-                if Config.shareInstance.isFlicker{
+                if Config.makeConfig.isFlicker{
                     addOpacityAnimation(view: label)
                 }else{
                     label.layer.removeAllAnimations()
                 }
                 return;
             }
-            
+
             let data = NSKeyedArchiver.archivedData(withRootObject: views.first ?? UIView.init())
             let view1 = NSKeyedUnarchiver.unarchiveObject(with: data) as! UIView
             let view2 = NSKeyedUnarchiver.unarchiveObject(with: data) as! UIView
@@ -121,7 +149,7 @@ class CycleScrollView: UIScrollView {
                     displayX = maxWidth
                 }
             }
-            if Config.shareInstance.isFlicker {
+            if Config.makeConfig.isFlicker {
                 addOpacityAnimation(view: view)
             }
         }
@@ -154,10 +182,11 @@ class CycleScrollView: UIScrollView {
     func changeLableValue()  {
         for label in views {
             if let l = label as? UILabel {
-               l.textColor = Config.shareInstance.textColor
+               l.textColor = Config.makeConfig.textColor
+                
             }
         }
-        seep = Config.shareInstance.speed
+        seep = Config.makeConfig.speed
     }
     
     // MARK: -- label添加闪烁动画
