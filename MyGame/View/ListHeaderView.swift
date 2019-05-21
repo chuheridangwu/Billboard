@@ -69,7 +69,7 @@ class ListHeaderView: UIView {
     }
     
     func showView(){
-        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveLinear, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveLinear, animations: {
             self.tableView.frame.origin.x = 0
             self.tableView.backgroundColor = .clear
             self.alpha = 1
@@ -82,12 +82,12 @@ class ListHeaderView: UIView {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveLinear, animations: {
+        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveLinear, animations: {
             self.updataItemView()
             self.itemView.alpha = 0;
         }) { (isOver) in
             if isOver{
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
                     self.tableView.frame.origin.x = -120
                 }, completion: { (_) in
                     self.alpha = 0
