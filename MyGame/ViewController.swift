@@ -105,7 +105,7 @@ class ViewController: UIViewController {
         UIApplication.shared.isIdleTimerDisabled = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // 保持常亮
         UIApplication.shared.isIdleTimerDisabled = false
