@@ -96,8 +96,8 @@ class Config {
     /// 阴影
     var isShadow: Bool = UserDefaults.standard.bool(forKey: shadow){
         didSet{
-            if callBack != nil {
-                callBack!()
+            if valueBlock != nil {
+                valueBlock!()
             }
         }
     }
@@ -105,8 +105,8 @@ class Config {
     /// 斜体
     var isItalic: Bool = UserDefaults.standard.bool(forKey: italic){
         didSet{
-            if callBack != nil {
-                callBack!()
+            if valueBlock != nil {
+                valueBlock!()
             }
         }
     }
@@ -114,8 +114,8 @@ class Config {
     /// 荧光
     var isFluore: Bool = UserDefaults.standard.bool(forKey: fluore){
         didSet{
-            if callBack != nil {
-                callBack!()
+            if valueBlock != nil {
+                valueBlock!()
             }
         }
     }

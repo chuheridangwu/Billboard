@@ -32,10 +32,10 @@ class ListHeaderView: UIView {
                                            ItmeType.fontSize([80,120,180,220,280,320],"text4".localized),
                                            ItmeType.fontColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text5".localized),
                                            ItmeType.bgColor([UIColor.red,.blue,.yellow,.white,.black,.green,.darkGray],"text6".localized),
+                                           ItmeType.attribute(["text20".localized,"text21".localized,"text22".localized],"text19".localized),
                                            ItmeType.direction(["text11".localized,"text12".localized],"text7".localized),
                                            ItmeType.filker(["text13".localized,"text14".localized],"text8".localized),
                                            ItmeType.isRepeat(["text15".localized,"text16".localized],"text9".localized),
-                                           ItmeType.attribute(["text20".localized,"text21".localized,"text22".localized],"text19".localized),
                                            ItmeType.anthor(["text17".localized,"text18".localized],"text10".localized)]
     
     fileprivate lazy var tableView: UITableView = {

@@ -26,33 +26,8 @@ class CycleScrollView: UIScrollView {
             }
             let label = views.first as! UILabel
             
-            var attribute: NSAttributedString?
-            if Config.makeConfig.isFluore {
-                let shadow = NSShadow.init()
-                shadow.shadowColor = Config.makeConfig.textColor
-                shadow.shadowOffset = CGSize(width: 1, height: 3)
-                shadow.shadowBlurRadius = 25
-    
-                if Config.makeConfig.isItalic{
-                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
-                }else{
-                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
-                }
-            }else{
-                let shadow = NSShadow.init()
-                shadow.shadowOffset = CGSize(width: 0, height: 0)
-                if Config.makeConfig.isShadow {
-                    shadow.shadowColor = UIColor.white
-                    shadow.shadowOffset = CGSize(width: 5, height: 5)
-                }
-                if Config.makeConfig.isItalic{
-                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
-                }else{
-                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
-                }
-            }
-            label.attributedText = attribute
-
+            addAttribute(label: label)
+            
             if isCycle == false || Config.makeConfig.speed == 0 {
                 label.numberOfLines = 0
                 label.frame = self.bounds
@@ -181,8 +156,10 @@ class CycleScrollView: UIScrollView {
     // MARK: -- 改变不需要重新刷新的值，比如颜色 速度
     func changeLableValue()  {
         for label in views {
-            if let l = label as? UILabel {
-               l.textColor = Config.makeConfig.textColor
+            if let label = label as? UILabel {
+               label.textColor = Config.makeConfig.textColor
+                
+                addAttribute(label: label)
                 
             }
         }
@@ -194,13 +171,43 @@ class CycleScrollView: UIScrollView {
     private func addOpacityAnimation(view: UIView){
         let animation = CABasicAnimation.init(keyPath: "opacity")
         animation.fromValue = 1.0
-        animation.toValue = 0.4
-        animation.duration = 0.12
+        animation.toValue = 0.3
+        animation.duration = 0.2
         animation.repeatCount = MAXFLOAT
         animation.isRemovedOnCompletion = false
         animation.fillMode = .forwards
         animation.timingFunction = CAMediaTimingFunction.init(name: CAMediaTimingFunctionName.easeIn)
         view.layer.add(animation, forKey: identfian)
+    }
+    
+    // MARK: -- 添加属性字体
+    private func addAttribute(label: UILabel){
+        var attribute: NSAttributedString?
+        if Config.makeConfig.isFluore {
+            let shadow = NSShadow.init()
+            shadow.shadowColor = Config.makeConfig.textColor
+            shadow.shadowOffset = CGSize(width: 1, height: 3)
+            shadow.shadowBlurRadius = 25
+            
+            if Config.makeConfig.isItalic{
+                attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
+            }else{
+                attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
+            }
+        }else{
+            let shadow = NSShadow.init()
+            shadow.shadowOffset = CGSize(width: 0, height: 0)
+            if Config.makeConfig.isShadow {
+                shadow.shadowColor = UIColor.white
+                shadow.shadowOffset = CGSize(width: 5, height: 5)
+            }
+            if Config.makeConfig.isItalic{
+                attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
+            }else{
+                attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
+            }
+        }
+        label.attributedText = attribute
     }
     
 }
