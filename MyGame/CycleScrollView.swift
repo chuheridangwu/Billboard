@@ -155,12 +155,15 @@ class CycleScrollView: UIScrollView {
     
     // MARK: -- 改变不需要重新刷新的值，比如颜色 速度
     func changeLableValue()  {
-        for label in views {
-            if let label = label as? UILabel {
-               label.textColor = Config.makeConfig.textColor
-                
-                addAttribute(label: label)
-                
+        DispatchQueue.global().async {
+            for label in self.views {
+                if let label = label as? UILabel {
+                    DispatchQueue.main.async {
+                        label.textColor = Config.makeConfig.textColor
+                        
+                        self.addAttribute(label: label)
+                    }
+                }
             }
         }
         seep = Config.makeConfig.speed
@@ -181,22 +184,28 @@ class CycleScrollView: UIScrollView {
     }
     
     // MARK: -- 添加属性字体
+    private var shadow:NSShadow = {
+        let shadow = NSShadow.init()
+        shadow.shadowColor = Config.makeConfig.textColor
+        shadow.shadowOffset = CGSize(width: 0, height: 0)
+        shadow.shadowBlurRadius = 0
+        return shadow
+    }()
+    
     private func addAttribute(label: UILabel){
         var attribute: NSAttributedString?
         if Config.makeConfig.isFluore {
-            let shadow = NSShadow.init()
             shadow.shadowColor = Config.makeConfig.textColor
             shadow.shadowOffset = CGSize(width: 1, height: 3)
             shadow.shadowBlurRadius = 25
-            
             if Config.makeConfig.isItalic{
                 attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
             }else{
                 attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
             }
         }else{
-            let shadow = NSShadow.init()
             shadow.shadowOffset = CGSize(width: 0, height: 0)
+            shadow.shadowBlurRadius = 0
             if Config.makeConfig.isShadow {
                 shadow.shadowColor = UIColor.white
                 shadow.shadowOffset = CGSize(width: 5, height: 5)
