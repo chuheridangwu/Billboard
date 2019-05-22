@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  MyGame
+
+  Created by MLive on 2019/4/15.
+  Copyright © 2019 Game. All rights reserved.
+*/
+
+
+"text1" = "😊爱你哟,麼麼噠😘";
+"text2" = "速度";
+"text3" = "字體樣式";
+"text4" = "字體大小";
+"text5" = "字體顏色";
+"text6" = "背景顏色";
+"text7" = "滾動方向";
+"text8" = "閃爍";
+"text9" = "循環滾動";
+"text10" = "支持作者";
+"text11" = "從右到左";
+"text12" = "從左到右";
+"text13" = "開啟字體閃爍";
+"text14" = "關閉字體閃爍";
+"text15" = "開啟循環滾動";
+"text16" = "關閉循環滾動";
+"text17" = "做的不錯，獎勵作者\n RMB￥1";
+"text18" = "如果有任何意見或者建議，請發郵件至153100950@qq.com";
+"text19" = "屬性";
+"text20" = "設置陰影";
+"text21" = "設置斜體";
+"text22" = "設置熒光";

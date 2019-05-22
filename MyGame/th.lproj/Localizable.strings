@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  MyGame
+
+  Created by MLive on 2019/4/15.
+  Copyright © 2019 Game. All rights reserved.
+*/
+
+
+"text1" = "😊Love you😘";
+"text2" = "Speed";
+"text3" = "Font Style";
+"text4" = "Font Size";
+"text5" = "Font Color";
+"text6" = "Bg Color";
+"text7" = "Direction";
+"text8" = "Flashing";
+"text9" = "Cycle";
+"text10" = "Support";
+"text11" = "from right to left";
+"text12" = "from left to right";
+"text13" = "Turn on font flicker";
+"text14" = "Close font flicker";
+"text15" = "Turn on loop scrolling";
+"text16" = "Close loop scrolling";
+"text17" = "Do a good job, reward the author \n RMB¥1";
+"text18" = "If you have any comments or suggestions, please send an email to 153100950@qq.com";
+"text19" = "Property";
+"text20" = "shadow";
+"text21" = "italic";
+"text22" = "Fluorescence";
