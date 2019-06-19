@@ -18,6 +18,7 @@ let fluore = "isFluore"
 
 typealias swiftBlock = () ->Void
 typealias defaultValueBlock = () ->Void
+typealias splashBlock = (Int) ->Void
 
 class Config {
     
@@ -60,6 +61,7 @@ class Config {
     
     var callBack: swiftBlock?
     var valueBlock: defaultValueBlock?
+    var splashBlock: splashBlock?
     
     var isCycle: Bool = UserDefaults.standard.bool(forKey: cycle){
         didSet{
@@ -120,6 +122,14 @@ class Config {
         }
     }
  
+    /// 荧光
+    var splash: Int = 0{
+        didSet{
+                if splashBlock.self != nil {
+                    splashBlock!(splash)
+                }
+        }
+    }
     
     static let makeConfig = Config()
     private init(){}
@@ -128,9 +138,10 @@ class Config {
         UserDefaults.standard.set(value, forKey: key)
     }
     
-    func startAnimation(block: @escaping swiftBlock, defaultBlock: @escaping defaultValueBlock)  {
+    func startAnimation(block: @escaping swiftBlock, defaultBlock: @escaping defaultValueBlock, splash:  @escaping splashBlock)  {
         callBack = block
         valueBlock = defaultBlock
+        splashBlock = splash
     }
     
 }

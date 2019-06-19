@@ -36,7 +36,7 @@ class AdmobTool: NSObject {
     }
     
     func createAndLoadInterstitial() {
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-8177181808824082/8938224700")
         interstitial.delegate = self
         // FIXME: - 这里如果不进行延时，会造成崩溃，现象是在初始化的时候在viewDidLoad方法中加载bannerView 和 当前类初始化加载插页广告 猜测发生的原因是网络加载的时候，会对当前对象进行重新赋值，没有做验证
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {

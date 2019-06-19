@@ -88,10 +88,16 @@ class ViewController: UIViewController {
 
         Config.makeConfig.label = label
         Config.makeConfig.startAnimation(block: {
+            self.cycleView.isHidden = false
             self.startAnimation()
 
-        }) {
+        }, defaultBlock: {
+            self.cycleView.isHidden = false
             self.settingLabelValue()
+
+        }) { (index) in
+            self.cycleView.isHidden = true
+            self.addAnimation(index: index)
         }
         self.startAnimation()
         timer.fireDate = Date.init(timeIntervalSinceNow: animationTime)
@@ -265,3 +271,40 @@ extension ViewController{
     }
 }
 
+extension ViewController{
+    private func addAnimation(index: Int){
+        let identfian = "backgroundColor"
+        contentView.layer.removeAnimation(forKey: identfian)
+        if index == 1 {
+            let animation = CAKeyframeAnimation.init(keyPath: "backgroundColor")
+            animation.values = [UIColor.yellow.cgColor,
+                                UIColor.black.cgColor,
+                                UIColor.orange.cgColor,
+                                UIColor.brown.cgColor,
+                                UIColor.cyan.cgColor,
+                                UIColor.red.cgColor,
+                                UIColor.clear.cgColor,
+                                UIColor.blue.cgColor,]
+            animation.duration = 0.15
+            animation.repeatCount = MAXFLOAT
+            animation.autoreverses = true
+            animation.fillMode = .forwards
+            animation.isRemovedOnCompletion = false
+            contentView.layer.add(animation, forKey: identfian)
+            contentView.backgroundColor = .white
+        }else if index == 2 {
+            let animation = CABasicAnimation.init(keyPath: "backgroundColor")
+            animation.fromValue = UIColor.black.cgColor
+            animation.toValue = Config.makeConfig.textColor.cgColor
+            animation.duration = 0.05
+            animation.repeatCount = MAXFLOAT
+            animation.autoreverses = true
+            animation.fillMode = .forwards
+            contentView.layer.add(animation, forKey: identfian)
+        }else{
+            contentView.backgroundColor = UIColor.black
+            cycleView.isHidden = false
+        }
+        
+    }
+}

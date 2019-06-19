@@ -19,6 +19,7 @@ enum ItmeType {
     case filker([String],String)
     case attribute([String],String)
     case anthor([String],String)
+    case Splash ([String],String)
 }
 
 class ListHeaderView: UIView {
@@ -36,7 +37,10 @@ class ListHeaderView: UIView {
                                            ItmeType.direction(["text11".localized,"text12".localized],"text7".localized),
                                            ItmeType.filker(["text13".localized,"text14".localized],"text8".localized),
                                            ItmeType.isRepeat(["text15".localized,"text16".localized],"text9".localized),
-                                           ItmeType.anthor(["text17".localized,"text18".localized],"text10".localized)]
+                                          ItmeType.Splash(["text24".localized,"text25".localized,"text26".localized],"text23".localized),
+                                          ItmeType.anthor(["text17".localized,"text18".localized],"text10".localized),
+                                
+    ]
     
     fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView.init(frame: CGRect(x: -100, y: 0, width: 120, height: listAry.count * 44), style: UITableView.Style.plain)
@@ -135,6 +139,8 @@ extension ListHeaderView: UITableViewDelegate, UITableViewDataSource{
              cell?.textLabel?.text = str
         case .anthor(_, let str):
             cell?.textLabel?.text = str
+        case .Splash(_, let str):
+            cell?.textLabel?.text = str
         }
         return cell!
     }
@@ -171,6 +177,8 @@ extension ListHeaderView: UITableViewDelegate, UITableViewDataSource{
             showItemView(cell: cell, width: 150, ary: ary as [AnyObject] , type: type)
         case .attribute(let ary,_):
             showItemView(cell: cell, width: 180, ary: ary as [AnyObject] , type: type)
+        case .Splash(let ary, _):
+            showItemView(cell: cell, width: 150, ary: ary as [AnyObject] , type: type)
         case .anthor(let ary, _):
             showItemView(cell: cell, width: 180, ary: ary as [AnyObject] , type: type, height: 65)
 
@@ -290,6 +298,8 @@ extension ListItemView: UITableViewDelegate, UITableViewDataSource{
                 cell.labelText = anyobj as? String
                 return cell
             }
+        case .Splash(_,_)?:
+            indexCell.textLabel?.text = anyobj as? String
         case .none:
             break
         case .some(.anthor(_, _)):
@@ -318,6 +328,8 @@ extension ListItemView: UITableViewDelegate, UITableViewDataSource{
         case .filker(_,_)?:
             height = 44
         case .attribute(_,_)?:
+            height = 44
+        case .Splash(_,_)?:
             height = 44
         case .anthor(_,_)?:
             if indexPath.row == 0{
@@ -356,6 +368,8 @@ extension ListItemView: UITableViewDelegate, UITableViewDataSource{
             let isFlicker = indexPath.row == 0 ? true : false
             Config.makeConfig.isFlicker = isFlicker
             Config.makeConfig.saveValue(value: isFlicker, key: flicker)
+        case .Splash(_,_)?:
+            Config.makeConfig.splash = indexPath.row + 1
         case .anthor(_,_)?:
             if indexPath.row == 0{
                 let productIdentifiers: Set<String> = ["com.dym.1"]
