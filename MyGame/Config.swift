@@ -63,6 +63,7 @@ class Config {
     var valueBlock: defaultValueBlock?
     var splashBlock: splashBlock?
     
+    /// 自动循环
     var isCycle: Bool = UserDefaults.standard.bool(forKey: cycle){
         didSet{
             if callBack != nil {
@@ -71,6 +72,7 @@ class Config {
         }
     }
     
+    /// 闪烁
     var isFlicker: Bool = UserDefaults.standard.bool(forKey: flicker){
         didSet{
             if callBack != nil {
@@ -79,6 +81,7 @@ class Config {
         }
     }
     
+    /// 背景颜色
     var bgColor: UIColor = .black{
         didSet{
             if valueBlock != nil {
@@ -87,6 +90,7 @@ class Config {
         }
     }
     
+    /// 滚动方向
     var isDirection:Bool = true{
         didSet{
             if valueBlock != nil {
@@ -107,6 +111,7 @@ class Config {
     /// 斜体
     var isItalic: Bool = UserDefaults.standard.bool(forKey: italic){
         didSet{
+            label.frame.size = CGSize(width: isItalic ? label.viewWidth() + 35 : label.viewWidth(), height: label.viewHeight())
             if valueBlock != nil {
                 valueBlock!()
             }
@@ -132,7 +137,9 @@ class Config {
     }
     
     static let makeConfig = Config()
-    private init(){}
+    private init(){
+        isCycle = true
+    }
     
     func saveValue(value:Bool, key: String){
         UserDefaults.standard.set(value, forKey: key)

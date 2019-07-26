@@ -150,6 +150,7 @@ class ViewController: UIViewController {
         view.endEditing(true)
         isHiddenBottomView()
         setView.showView()
+        AdmobTool.sharedManager.showInterstitial(showController: self)
     }
     
     // MARK: - 是否隐藏底部视图

@@ -26,7 +26,7 @@ class CycleScrollView: UIScrollView {
             }
             let label = views.first as! UILabel
             
-            addAttribute(label: label)
+            addAttribute(label: label, index: 0)
             
             if isCycle == false || Config.makeConfig.speed == 0 {
                 label.numberOfLines = 0
@@ -156,12 +156,11 @@ class CycleScrollView: UIScrollView {
     // MARK: -- 改变不需要重新刷新的值，比如颜色 速度
     func changeLableValue()  {
         DispatchQueue.global().async {
-            for label in self.views {
+            for (index,label) in self.views.enumerated() {
                 if let label = label as? UILabel {
                     DispatchQueue.main.async {
                         label.textColor = Config.makeConfig.textColor
-                        
-                        self.addAttribute(label: label)
+                        self.addAttribute(label: label,index: index)
                     }
                 }
             }
@@ -192,30 +191,34 @@ class CycleScrollView: UIScrollView {
         return shadow
     }()
     
-    private func addAttribute(label: UILabel){
-        var attribute: NSAttributedString?
-        if Config.makeConfig.isFluore {
-            shadow.shadowColor = Config.makeConfig.textColor
-            shadow.shadowOffset = CGSize(width: 1, height: 3)
-            shadow.shadowBlurRadius = 25
-            if Config.makeConfig.isItalic{
-                attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
+    var attribute: NSAttributedString?
+    private func addAttribute(label: UILabel,index: Int){
+        if index < 1{
+            
+            if Config.makeConfig.isFluore {
+                shadow.shadowColor = Config.makeConfig.textColor
+                shadow.shadowOffset = CGSize(width: 1, height: 3)
+                shadow.shadowBlurRadius = 25
+                if Config.makeConfig.isItalic{
+                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
+                }else{
+                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
+                }
             }else{
-                attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
-            }
-        }else{
-            shadow.shadowOffset = CGSize(width: 0, height: 0)
-            shadow.shadowBlurRadius = 0
-            if Config.makeConfig.isShadow {
-                shadow.shadowColor = UIColor.white
-                shadow.shadowOffset = CGSize(width: 5, height: 5)
-            }
-            if Config.makeConfig.isItalic{
-                attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
-            }else{
-                attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
+                shadow.shadowOffset = CGSize(width: 0, height: 0)
+                shadow.shadowBlurRadius = 0
+                if Config.makeConfig.isShadow {
+                    shadow.shadowColor = UIColor.white
+                    shadow.shadowOffset = CGSize(width: 5, height: 5)
+                }
+                if Config.makeConfig.isItalic{
+                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow,NSAttributedString.Key.obliqueness : 0.4])
+                }else{
+                    attribute = NSAttributedString.init(string: label.text ?? "", attributes: [NSAttributedString.Key.shadow : shadow])
+                }
             }
         }
+        
         label.attributedText = attribute
     }
     

@@ -90,7 +90,7 @@ class AdmobTool: NSObject {
         let saveDate = dateFormatter.date(from: UserDefaults.standard.object(forKey: saveTime) as! String)
         let calendar = Calendar.current
         let dateComponets = calendar.dateComponents([Calendar.Component.year,Calendar.Component.month,Calendar.Component.day,Calendar.Component.hour,Calendar.Component.minute,Calendar.Component.second], from: saveDate ?? Date.init(), to: Date.init())
-        if dateComponets.day ?? 4 > 3 {
+        if dateComponets.minute ?? 4 > 10 {
             return true
         }
         return false

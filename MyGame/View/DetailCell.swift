@@ -102,8 +102,7 @@ class ColorCell: BaseCell {
     var bgColor: Int = 0{
         didSet{
             label.text = "text6".localized
-            label.textColor = .white
-            label.backgroundColor = fontColor
+            label.textColor = fontColor
         }
     }
     
